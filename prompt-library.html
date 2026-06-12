@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Prompt Library for Business Analysts | CareerForge AI</title>
+  <meta name="description" content="A searchable library of ready-to-use AI prompts for reporting, summarizing, documentation, and interview prep for business analysts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .prompt-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .prompt-card {
+      background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 20px;
+    }
+    .prompt-card .cat {
+      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--teal); background: #E8F2F1;
+      padding: 3px 9px; border-radius: 3px; display: inline-block; margin-bottom: 10px;
+    }
+    .prompt-card pre {
+      font-family: var(--font-mono); font-size: 0.85rem; background: #F0ECE3;
+      padding: 14px; border-radius: 4px; white-space: pre-wrap; margin: 10px 0;
+      border: 1px solid var(--line);
+    }
+    .copy-btn {
+      font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.05em; background: var(--navy); color: var(--cream);
+      border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;
+    }
+    .copy-btn:hover { background: #2A3548; }
+    .copy-btn.copied { background: var(--teal); }
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .filter-btn {
+      font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.05em; background: #fff; border: 1.5px solid var(--line);
+      padding: 8px 16px; border-radius: 20px; cursor: pointer; color: var(--charcoal);
+    }
+    .filter-btn.active { background: var(--navy); color: var(--cream); border-color: var(--navy); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="../index.html" class="logo">CareerForge<span>AI</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#tools">Tools</a></li>
+        <li><a href="../index.html#blog">Guides</a></li>
+        <li><a href="../index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="tool-hero">
+    <div class="container">
+      <span class="eyebrow">Tool</span>
+      <h1>AI Prompt Library for Business Analysts</h1>
+      <p>Copy-ready prompts for Claude or ChatGPT, organized by task. Filter by category, copy, and adapt to your data.</p>
+    </div>
+  </section>
+
+  <section class="tool-body">
+    <div class="container">
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="reporting">Reporting</button>
+        <button class="filter-btn" data-cat="data">Data & SQL</button>
+        <button class="filter-btn" data-cat="docs">Documentation</button>
+        <button class="filter-btn" data-cat="career">Career Prep</button>
+      </div>
+
+      <div class="prompt-list" id="prompt-list">
+
+        <div class="prompt-card" data-cat="reporting">
+          <span class="cat">Reporting</span>
+          <h3>Weekly summary from raw log data</h3>
+          <pre>Here is a list of [escalations/tickets/incidents] from this week [paste data]. Group them by root cause, identify the top 3 most frequent categories, and note any category that increased compared to last week. Format as a short bulleted summary for a team update.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="reporting">
+          <span class="cat">Reporting</span>
+          <h3>Variance report narrative</h3>
+          <pre>Here is this month's budget vs actual data by category [paste table]. Write a short narrative (under 200 words) explaining the three largest variances in plain business language, suitable for a management summary. Note where further investigation may be warranted.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="data">
+          <span class="cat">Data & SQL</span>
+          <h3>Draft a SQL query from plain language</h3>
+          <pre>Write a SQL query that [describe what you need, e.g. "finds customers who ordered in the last 30 days but had no orders in the prior 90 days"]. Use CTEs for readability, add comments explaining each step, and note any assumptions about the schema.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="data">
+          <span class="cat">Data & SQL</span>
+          <h3>Explain a complex query in plain English</h3>
+          <pre>Here is a SQL query [paste query]. Explain what it does step by step in plain language, as if explaining to someone who understands the business but not SQL syntax.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="docs">
+          <span class="cat">Documentation</span>
+          <h3>Turn rough notes into an SOP</h3>
+          <pre>I'm going to describe a process in rough, possibly out-of-order notes [paste notes]. Turn this into a clear, numbered standard operating procedure with defined ownership at each step. Flag any steps where the sequence or ownership seems unclear.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="docs">
+          <span class="cat">Documentation</span>
+          <h3>Meeting notes to action items</h3>
+          <pre>Here are raw notes from a meeting [paste notes]. Extract a clear list of action items, each with an owner (if mentioned) and a suggested priority (high/medium/low) based on context.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="career">
+          <span class="cat">Career Prep</span>
+          <h3>Pressure-test your project description</h3>
+          <pre>I'm going to describe a project I built [describe project]. Ask me three follow-up questions an interviewer focused on AI/analytics roles might ask, focused on impact and my specific role. Then tell me which parts of my original description were vague or generic.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+        <div class="prompt-card" data-cat="career">
+          <span class="cat">Career Prep</span>
+          <h3>Translate operations experience into AI-analyst language</h3>
+          <pre>Here is a bullet point from my resume describing my experience [paste bullet]. Rewrite it to highlight how this experience relates to AI-driven analytics or automation roles, without exaggerating or adding anything untrue.</pre>
+          <button class="copy-btn">Copy prompt</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>CareerForge AI</h4>
+          <p class="about">Free tools and guides for analysts and operations professionals moving into AI-driven roles.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/ai-business-analyst-transition.html">AI Analyst Transition</a></li>
+            <li><a href="../blog/ai-tools-for-analysts.html">AI Tools for Analysts</a></li>
+            <li><a href="../blog/ats-resume-guide.html">ATS Resume Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../index.html#scanner">Resume Scanner</a></li>
+            <li><a href="prompt-library.html">Prompt Library</a></li>
+            <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CareerForge AI</span>
+        <span>Built with intent, not templates</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Filtering
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        document.querySelectorAll('.prompt-card').forEach(card => {
+          card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+        });
+      });
+    });
+
+    // Copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.previousElementSibling.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

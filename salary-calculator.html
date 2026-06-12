@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salary Benchmark Calculator for Analysts | CareerForge AI</title>
+  <meta name="description" content="Estimate a fair salary range for business analyst, operations analyst, and AI-adjacent roles based on experience level and location.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .calc-form label {
+      font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.05em; color: var(--navy); display: block; margin-bottom: 6px; margin-top: 16px;
+    }
+    .calc-form select, .calc-form input {
+      width: 100%; font-family: var(--font-body); font-size: 0.95rem; padding: 12px;
+      border: 1.5px solid var(--line); border-radius: 4px; background: #fff;
+    }
+    .calc-form select:focus, .calc-form input:focus {
+      outline: 2px solid var(--teal); outline-offset: 1px; border-color: var(--teal);
+    }
+    .range-display {
+      font-family: var(--font-display); font-weight: 700; font-size: 2rem;
+      color: var(--teal); margin: 4px 0;
+    }
+    .range-note {
+      font-family: var(--font-mono); font-size: 0.8rem; color: #777;
+    }
+    .disclaimer {
+      font-size: 0.85rem; color: #777; margin-top: 16px; border-top: 1px solid var(--line); padding-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="../index.html" class="logo">CareerForge<span>AI</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#tools">Tools</a></li>
+        <li><a href="../index.html#blog">Guides</a></li>
+        <li><a href="../index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="tool-hero">
+    <div class="container">
+      <span class="eyebrow">Tool</span>
+      <h1>Salary Benchmark Calculator</h1>
+      <p>Get a rough estimated salary range for analyst and AI-adjacent roles based on experience level, location tier, and role type. Use this as a starting point for negotiation research, not a final answer.</p>
+    </div>
+  </section>
+
+  <section class="tool-body">
+    <div class="container tool-grid">
+      <div class="panel calc-form">
+        <h3>Your details</h3>
+
+        <label for="role">Role type</label>
+        <select id="role">
+          <option value="ops">Operations / Escalation Analyst</option>
+          <option value="ba">Business Analyst</option>
+          <option value="aiba">AI Business Analyst</option>
+          <option value="databa">Data / BI Analyst</option>
+        </select>
+
+        <label for="experience">Years of experience</label>
+        <select id="experience">
+          <option value="0-2">0–2 years</option>
+          <option value="3-5" selected>3–5 years</option>
+          <option value="6-9">6–9 years</option>
+          <option value="10+">10+ years</option>
+        </select>
+
+        <label for="location">Location tier</label>
+        <select id="location">
+          <option value="india-metro">India — Metro (Bangalore, Hyderabad, Mumbai, Delhi NCR)</option>
+          <option value="india-tier2">India — Tier 2 city</option>
+          <option value="us">United States</option>
+          <option value="uk">United Kingdom</option>
+          <option value="remote-global">Remote, globally distributed company</option>
+        </select>
+
+        <button class="btn btn-primary" id="calc-btn" style="border:none; margin-top: 20px;">Calculate Range</button>
+      </div>
+
+      <div class="panel" id="result-panel">
+        <h3>Estimated range</h3>
+        <div class="range-display" id="range-output">Select your details and calculate</div>
+        <p class="range-note" id="range-note"></p>
+
+        <div class="disclaimer">
+          <strong>How to use this:</strong> This is a rough starting point based on general market patterns, not a guarantee or formal salary survey. Cross-check against current postings for your specific role and city, and adjust for company size, funding stage, and your specific skill set — especially demonstrated AI/automation experience, which tends to push toward the higher end of a range.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>CareerForge AI</h4>
+          <p class="about">Free tools and guides for analysts and operations professionals moving into AI-driven roles.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/ai-business-analyst-transition.html">AI Analyst Transition</a></li>
+            <li><a href="../blog/ai-tools-for-analysts.html">AI Tools for Analysts</a></li>
+            <li><a href="../blog/ats-resume-guide.html">ATS Resume Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../index.html#scanner">Resume Scanner</a></li>
+            <li><a href="prompt-library.html">Prompt Library</a></li>
+            <li><a href="salary-calculator.html">Salary Calculator</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CareerForge AI</span>
+        <span>Built with intent, not templates</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Base ranges in USD/year for "ops" + "0-2" + "remote-global", scaled by multipliers
+    const baseLow = 28000, baseHigh = 40000;
+
+    const roleMultiplier = { ops: 1.0, ba: 1.15, aiba: 1.35, databa: 1.25 };
+    const expMultiplier = { "0-2": 1.0, "3-5": 1.5, "6-9": 2.2, "10+": 3.0 };
+
+    // location: { multiplier, currency, label }
+    const locationData = {
+      "india-metro":   { mult: 0.65, currency: "₹", localMult: 22, label: "INR/year, India metro" },
+      "india-tier2":   { mult: 0.45, currency: "₹", localMult: 22, label: "INR/year, India Tier 2" },
+      "us":            { mult: 2.2,  currency: "$", localMult: 1, label: "USD/year, United States" },
+      "uk":            { mult: 1.8,  currency: "£", localMult: 0.79, label: "GBP/year, United Kingdom" },
+      "remote-global": { mult: 1.0,  currency: "$", localMult: 1, label: "USD/year, remote global" }
+    };
+
+    function formatNumber(n) {
+      return Math.round(n).toLocaleString('en-IN');
+    }
+
+    document.getElementById('calc-btn').addEventListener('click', () => {
+      const role = document.getElementById('role').value;
+      const exp = document.getElementById('experience').value;
+      const loc = document.getElementById('location').value;
+
+      const locInfo = locationData[loc];
+      const rMult = roleMultiplier[role];
+      const eMult = expMultiplier[exp];
+
+      let low = baseLow * rMult * eMult * locInfo.mult;
+      let high = baseHigh * rMult * eMult * locInfo.mult;
+
+      // Convert to local currency display
+      low = low * locInfo.localMult;
+      high = high * locInfo.localMult;
+
+      // For INR, show in lakhs if applicable
+      let display;
+      if (locInfo.currency === "₹" && low > 100000) {
+        display = `${locInfo.currency}${(low/100000).toFixed(1)}L – ${locInfo.currency}${(high/100000).toFixed(1)}L`;
+      } else {
+        display = `${locInfo.currency}${formatNumber(low)} – ${locInfo.currency}${formatNumber(high)}`;
+      }
+
+      document.getElementById('range-output').textContent = display;
+      document.getElementById('range-note').textContent = `Estimated annual ${locInfo.label}, before negotiation`;
+    });
+  </script>
+
+</body>
+</html>
