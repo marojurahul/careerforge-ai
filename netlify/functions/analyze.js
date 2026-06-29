@@ -4,12 +4,15 @@ exports.handler = async function(event) {
   }
 
   try {
-    const { process, context, industry } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const processDesc = body.process;
+    const context = body.context;
+    const industry = body.industry;
 
     const prompt = `You are a senior business analyst. Analyse the following process and produce a structured report with three sections.
 
 CURRENT PROCESS:
-${process}
+${processDesc}
 ${context ? `\nCONTEXT / PAIN POINTS / GOALS:\n${context}` : ''}
 ${industry ? `\nINDUSTRY: ${industry}` : ''}
 
@@ -24,11 +27,13 @@ TO-BE RECOMMENDATIONS:
 GAP ANALYSIS:
 [Identify the specific gaps between AS-IS and TO-BE. Cover: process gaps, technology gaps, skills/capability gaps, change management considerations, suggested priority order for addressing each gap.]`;
 
+    const apiKey = process.env.OPENAI_API_KEY;
+
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
