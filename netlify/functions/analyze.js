@@ -16,18 +16,21 @@ ${processDesc}
 ${context ? `\nCONTEXT / PAIN POINTS / GOALS:\n${context}` : ''}
 ${industry ? `\nINDUSTRY: ${industry}` : ''}
 
-Produce your response in exactly this format with these three section headers and nothing else before or after:
+Produce your response in exactly this format:
 
 AS-IS ANALYSIS:
-[Write a clear, structured analysis of the current process. Cover: key process steps, stakeholders involved, inputs and outputs, identified inefficiencies, bottlenecks, risks, and root causes of problems. Use plain numbered or bulleted points.]
+[analysis here]
 
 TO-BE RECOMMENDATIONS:
-[Write specific, actionable recommendations for the future state. Cover: redesigned process steps, technology or automation opportunities, how roles/responsibilities should change, expected benefits and outcomes. Be concrete and practical, not generic.]
+[recommendations here]
 
 GAP ANALYSIS:
-[Identify the specific gaps between AS-IS and TO-BE. Cover: process gaps, technology gaps, skills/capability gaps, change management considerations, suggested priority order for addressing each gap.]`;
+[gap analysis here]`;
 
     const apiKey = process.env.OPENAI_API_KEY;
+    
+    console.log("API Key exists:", !!apiKey);
+    console.log("API Key prefix:", apiKey ? apiKey.substring(0, 7) : "none");
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -43,6 +46,17 @@ GAP ANALYSIS:
     });
 
     const data = await response.json();
+    console.log("OpenAI response status:", response.status);
+    console.log("OpenAI data:", JSON.stringify(data).substring(0, 300));
+
+    if (data.error) {
+      return {
+        statusCode: 200,
+        headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify({ result: "OpenAI error: " + data.error.message })
+      };
+    }
+
     const text = data.choices[0].message.content;
 
     return {
@@ -52,6 +66,7 @@ GAP ANALYSIS:
     };
 
   } catch (err) {
+    console.log("Catch error:", err.message);
     return {
       statusCode: 500,
       headers: { "Access-Control-Allow-Origin": "*" },
