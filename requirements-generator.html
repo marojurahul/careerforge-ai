@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Requirements Generator | CareerForge AI</title>
+  <meta name="description" content="Free AI-powered requirements generator for business analysts. Describe your AI project and get structured requirements documents instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================
+       Design System — Navy BA Toolkit Theme
+       ========================================= */
+    :root {
+      --navy:        #0D1B2A;
+      --navy-mid:    #1A2D42;
+      --navy-light:  #243B55;
+      --navy-border: #2E4A63;
+      --amber:       #E8A24B;
+      --amber-light: #F0B866;
+      --teal:        #4ECDC4;
+      --teal-dark:   #38B2AA;
+      --cream:       #F4F1EC;
+      --white:       #FFFFFF;
+      --text-main:   #E8E4DC;
+      --text-muted:  #9BAABB;
+      --red:         #E05252;
+      --green:       #4CAF7D;
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Source Serif 4', serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--navy);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      background: var(--navy);
+      border-bottom: 2px solid var(--amber);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--amber); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links a { color: var(--text-muted); }
+    .nav-links a:hover { color: var(--amber); text-decoration: none; }
+
+    /* ---------- Hero ---------- */
+    .tool-hero {
+      background: var(--navy-mid);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 48px 0 40px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--amber);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .tool-hero h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .tool-hero p {
+      color: var(--text-muted);
+      max-width: 620px;
+      font-size: 1rem;
+    }
+
+    /* ---------- Sections ---------- */
+    .tool-body { padding: 40px 0 64px; }
+
+    .how-it-works {
+      background: var(--navy-light);
+      border: 1px solid var(--navy-border);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 32px;
+    }
+
+    .step {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ---------- Input Panel ---------- */
+    .input-panel {
+      background: var(--navy-mid);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    .field-label:first-of-type { margin-top: 0; }
+
+    textarea, select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      padding: 14px;
+      background: var(--navy-light);
+      border: 1.5px solid var(--navy-border);
+      border-radius: 5px;
+      color: var(--text-main);
+      resize: vertical;
+      transition: border-color 0.15s;
+    }
+
+    textarea::placeholder { color: var(--text-muted); }
+
+    textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+
+    select option { background: var(--navy-mid); }
+
+    .char-count {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    /* ---------- Button ---------- */
+    .btn-generate {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--amber);
+      color: var(--navy);
+      border: none;
+      padding: 16px 36px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-generate:hover { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-icon { font-size: 1rem; }
+
+    /* ---------- Loading ---------- */
+    .loading-bar {
+      display: none;
+      background: var(--navy-mid);
+      border: 1px solid var(--navy-border);
+      border-radius: 6px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .loading-bar.show { display: block; }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--navy-border);
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 14px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Error ---------- */
+    .error-box {
+      display: none;
+      background: rgba(224, 82, 82, 0.1);
+      border: 1px solid var(--red);
+      border-radius: 5px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .error-box.show { display: block; }
+
+    /* ---------- Results ---------- */
+    .results-area { display: none; }
+    .results-area.show { display: block; }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .results-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+
+    .results-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .btn-copy-all {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--navy-light);
+      color: var(--text-muted);
+      border: 1px solid var(--navy-border);
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-copy-all:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-copy-all.copied { border-color: var(--green); color: var(--green); }
+
+    /* ---------- Result Sections ---------- */
+    .req-section {
+      background: var(--navy-mid);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .req-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--navy-border);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .req-section-header:hover { background: var(--navy-light); }
+
+    .req-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 9px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .badge-1 { background: rgba(232,162,75,0.15); color: var(--amber); border: 1px solid rgba(232,162,75,0.3); }
+    .badge-2 { background: rgba(78,205,196,0.12); color: var(--teal); border: 1px solid rgba(78,205,196,0.3); }
+    .badge-3 { background: rgba(76,175,125,0.12); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+    .badge-4 { background: rgba(224,82,82,0.12); color: var(--red); border: 1px solid rgba(224,82,82,0.3); }
+    .badge-5 { background: rgba(155,170,187,0.12); color: var(--text-muted); border: 1px solid rgba(155,170,187,0.3); }
+    .badge-6 { background: rgba(132,100,220,0.12); color: #A07AE8; border: 1px solid rgba(132,100,220,0.3); }
+    .badge-7 { background: rgba(232,162,75,0.08); color: var(--amber-light); border: 1px solid rgba(232,162,75,0.2); }
+
+    .req-section-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--white);
+      flex: 1;
+    }
+
+    .section-toggle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .section-toggle.open { transform: rotate(180deg); }
+
+    .req-content {
+      padding: 20px;
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text-main);
+      white-space: pre-wrap;
+      border-top: none;
+    }
+
+    .req-content.collapsed { display: none; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--navy-border);
+      padding: 36px 0;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+
+    .footer-logo span { color: var(--amber); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links a { color: var(--text-muted); }
+    .footer-links a:hover { color: var(--teal); text-decoration: none; }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 700px) {
+      .tool-hero h1 { font-size: 1.7rem; }
+      .how-it-works { flex-direction: column; gap: 16px; }
+      .input-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="index.html" class="logo">CareerForge<span>AI</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="index.html#blog">Guides</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="tool-hero">
+    <div class="container">
+      <span class="eyebrow">Tool — Requirements Engineering</span>
+      <h1>AI Requirements Generator</h1>
+      <p>Describe your AI project in plain language. Get a structured, professional requirements document covering business objectives, functional specs, fairness controls, and acceptance criteria — instantly.</p>
+    </div>
+  </section>
+
+  <section class="tool-body">
+    <div class="container">
+
+      <div class="how-it-works">
+        <div class="step">
+          <span class="step-num">Step 1</span>
+          Describe your AI project — what it should do, who uses it, what problem it solves
+        </div>
+        <div class="step">
+          <span class="step-num">Step 2</span>
+          Select your industry so requirements are tailored to your regulatory context
+        </div>
+        <div class="step">
+          <span class="step-num">Step 3</span>
+          Get 7 structured requirement sections ready to paste into your BA documentation
+        </div>
+      </div>
+
+      <div class="input-panel">
+        <label class="field-label" for="project-input">Describe your AI project</label>
+        <textarea
+          id="project-input"
+          rows="6"
+          placeholder="e.g. We want to build an AI system that automatically triages incoming customer support tickets, categorises them by urgency and type, and routes them to the correct team. The system should handle 500+ tickets per day and reduce average response time from 4 hours to under 30 minutes..."
+          maxlength="2000"
+        ></textarea>
+        <div class="char-count"><span id="char-count">0</span> / 2000</div>
+
+        <div class="input-row">
+          <div>
+            <label class="field-label" for="industry-select">Industry</label>
+            <select id="industry-select">
+              <option value="Healthcare">Healthcare</option>
+              <option value="Finance">Finance</option>
+              <option value="Retail">Retail</option>
+              <option value="Legal">Legal</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="complexity-select">Project complexity</label>
+            <select id="complexity-select">
+              <option value="MVP / Proof of Concept">MVP / Proof of Concept</option>
+              <option value="Production System" selected>Production System</option>
+              <option value="Enterprise Scale">Enterprise Scale</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-generate" id="generate-btn">
+          <span class="btn-icon">⚡</span>
+          Generate Requirements
+        </button>
+      </div>
+
+      <div class="error-box" id="error-box"></div>
+      <div class="loading-bar" id="loading-bar">
+        <div class="spinner"></div>
+        <p class="loading-text" id="loading-text">Generating requirements...</p>
+      </div>
+
+      <div class="results-area" id="results-area">
+        <div class="results-header">
+          <span class="results-title">Requirements Document</span>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span class="results-meta" id="results-meta"></span>
+            <button class="btn-copy-all" id="copy-all-btn">Copy all</button>
+          </div>
+        </div>
+
+        <div id="sections-container"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">CareerForge<span>AI</span></span>
+      <ul class="footer-links">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="process-mapper.html">Process Mapper</a></li>
+        <li><a href="prompt-library.html">Prompt Library</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 CareerForge AI</span>
+    </div>
+  </footer>
+
+  <script>
+    // =============================================
+    // CONFIG — Replace with your key or use Netlify
+    // =============================================
+    const OPENAI_API_KEY = "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";
+
+    // =============================================
+    // Section definitions
+    // =============================================
+    const SECTIONS = [
+      { key: "BUSINESS_OBJECTIVES",           label: "Business Objectives",            badge: "badge-1" },
+      { key: "FUNCTIONAL_REQUIREMENTS",       label: "Functional Requirements",        badge: "badge-2" },
+      { key: "PERFORMANCE_THRESHOLD",         label: "Performance Threshold",          badge: "badge-3" },
+      { key: "BIAS_AND_FAIRNESS",             label: "Bias and Fairness Requirements", badge: "badge-4" },
+      { key: "FALLBACK_BEHAVIOR",             label: "Fallback Behavior",              badge: "badge-5" },
+      { key: "HUMAN_OVERRIDE_SPECIFICATIONS", label: "Human Override Specifications",  badge: "badge-6" },
+      { key: "ACCEPTANCE_CRITERIA",           label: "Acceptance Criteria",            badge: "badge-7" },
+    ];
+
+    const LOADING_MESSAGES = [
+      "Generating requirements...",
+      "Analysing business objectives...",
+      "Defining functional requirements...",
+      "Checking fairness and bias considerations...",
+      "Writing acceptance criteria...",
+    ];
+
+    // =============================================
+    // Character counter
+    // =============================================
+    const projectInput = document.getElementById("project-input");
+    const charCount    = document.getElementById("char-count");
+    projectInput.addEventListener("input", () => {
+      charCount.textContent = projectInput.value.length;
+    });
+
+    // =============================================
+    // Toggle sections
+    // =============================================
+    function buildSection(section, content, index) {
+      const div = document.createElement("div");
+      div.className = "req-section";
+      div.innerHTML = `
+        <div class="req-section-header" data-index="${index}">
+          <span class="req-badge ${section.badge}">${section.label.split(" ")[0]}</span>
+          <span class="req-section-title">${section.label}</span>
+          <span class="section-toggle open" id="toggle-${index}">▼</span>
+        </div>
+        <div class="req-content" id="content-${index}">${content}</div>
+      `;
+      div.querySelector(".req-section-header").addEventListener("click", () => {
+        const contentEl = document.getElementById(`content-${index}`);
+        const toggleEl  = document.getElementById(`toggle-${index}`);
+        contentEl.classList.toggle("collapsed");
+        toggleEl.classList.toggle("open");
+      });
+      return div;
+    }
+
+    // =============================================
+    // Parse response into sections
+    // =============================================
+    function parseSections(text) {
+      const result = {};
+      SECTIONS.forEach((section, i) => {
+        const nextKey = SECTIONS[i + 1] ? SECTIONS[i + 1].key + ":" : null;
+        const pattern = nextKey
+          ? new RegExp(`${section.key}:\\s*([\\s\\S]*?)(?=${nextKey}|$)`, "i")
+          : new RegExp(`${section.key}:\\s*([\\s\\S]*?)$`, "i");
+        const match = text.match(pattern);
+        result[section.key] = match ? match[1].trim() : "";
+      });
+      return result;
+    }
+
+    // =============================================
+    // Main generate function
+    // =============================================
+    document.getElementById("generate-btn").addEventListener("click", async () => {
+      const projectDesc = projectInput.value.trim();
+      const industry    = document.getElementById("industry-select").value;
+      const complexity  = document.getElementById("complexity-select").value;
+
+      if (!projectDesc || projectDesc.length < 30) {
+        showError("Please describe your AI project in more detail (at least a few sentences).");
+        return;
+      }
+
+      hideError();
+      hideResults();
+      showLoading(true);
+
+      const prompt = `You are a senior AI business analyst specialising in ${industry}. Generate a comprehensive AI requirements document for the following project.
+
+PROJECT DESCRIPTION:
+${projectDesc}
+
+INDUSTRY: ${industry}
+COMPLEXITY: ${complexity}
+
+Respond in EXACTLY this format with these section headers. Do not add any text before or after. Be specific, professional, and tailored to the ${industry} industry context.
+
+BUSINESS_OBJECTIVES:
+[3-5 clear business objectives this AI system should achieve. Include measurable outcomes where possible.]
+
+FUNCTIONAL_REQUIREMENTS:
+[8-12 specific functional requirements. Use "The system shall..." format. Cover core features, integrations, data inputs/outputs, and user interactions.]
+
+PERFORMANCE_THRESHOLD:
+[Specific, measurable performance metrics. Include accuracy thresholds, response time SLAs, throughput, uptime requirements, and scalability targets relevant to ${complexity}.]
+
+BIAS_AND_FAIRNESS:
+[Specific bias and fairness requirements for ${industry}. Cover protected attributes to monitor, fairness metrics, regular audit requirements, and regulatory compliance relevant to this industry.]
+
+FALLBACK_BEHAVIOR:
+[What the system must do when AI confidence is low, when the model fails, during downtime, or when edge cases are detected. Include specific thresholds and fallback actions.]
+
+HUMAN_OVERRIDE_SPECIFICATIONS:
+[Detailed specifications for human-in-the-loop controls. Who can override, under what conditions, how overrides are logged, and how override data feeds back into model improvement.]
+
+ACCEPTANCE_CRITERIA:
+[7-10 specific, testable acceptance criteria in Given/When/Then or measurable format that must be met before production deployment.]`;
+
+      let msgIndex = 0;
+      const msgInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % LOADING_MESSAGES.length;
+        document.getElementById("loading-text").textContent = LOADING_MESSAGES[msgIndex];
+      }, 1800);
+
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${OPENAI_API_KEY}`
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            max_tokens: 2000,
+            temperature: 0.4,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+
+        clearInterval(msgInterval);
+        const data = await response.json();
+
+        if (data.error) {
+          showError("OpenAI error: " + data.error.message);
+          showLoading(false);
+          return;
+        }
+
+        const text     = data.choices[0].message.content;
+        const parsed   = parseSections(text);
+        const container = document.getElementById("sections-container");
+        container.innerHTML = "";
+
+        SECTIONS.forEach((section, i) => {
+          const content = parsed[section.key] || "No content generated for this section.";
+          container.appendChild(buildSection(section, content, i));
+        });
+
+        document.getElementById("results-meta").textContent =
+          `${industry} · ${complexity} · ${new Date().toLocaleTimeString()}`;
+
+        showLoading(false);
+        showResults();
+
+      } catch (err) {
+        clearInterval(msgInterval);
+        showLoading(false);
+        showError("Network error: " + err.message + ". Please try again.");
+      }
+    });
+
+    // =============================================
+    // Copy all
+    // =============================================
+    document.getElementById("copy-all-btn").addEventListener("click", () => {
+      const sections = document.querySelectorAll(".req-content");
+      const titles   = document.querySelectorAll(".req-section-title");
+      let full = "AI REQUIREMENTS DOCUMENT\n" + "=".repeat(40) + "\n\n";
+      titles.forEach((t, i) => {
+        full += t.textContent.toUpperCase() + "\n" + "-".repeat(30) + "\n";
+        full += sections[i].textContent.trim() + "\n\n";
+      });
+      navigator.clipboard.writeText(full).then(() => {
+        const btn = document.getElementById("copy-all-btn");
+        btn.textContent = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Copy all";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    });
+
+    // =============================================
+    // Helpers
+    // =============================================
+    function showError(msg) {
+      const box = document.getElementById("error-box");
+      box.textContent = msg;
+      box.classList.add("show");
+    }
+
+    function hideError() {
+      document.getElementById("error-box").classList.remove("show");
+    }
+
+    function showLoading(show) {
+      const bar = document.getElementById("loading-bar");
+      const btn = document.getElementById("generate-btn");
+      if (show) {
+        bar.classList.add("show");
+        btn.disabled = true;
+      } else {
+        bar.classList.remove("show");
+        btn.disabled = false;
+        document.getElementById("loading-text").textContent = LOADING_MESSAGES[0];
+      }
+    }
+
+    function showResults() {
+      document.getElementById("results-area").classList.add("show");
+      document.getElementById("results-area").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function hideResults() {
+      document.getElementById("results-area").classList.remove("show");
+    }
+  </script>
+
+</body>
+</html>
