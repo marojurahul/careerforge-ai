@@ -1,7 +1,4 @@
-<html>
-        <head><title>Downloaded HTML</title></head>
-        <body>
-            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1029,6 +1026,4 @@ Be specific to ${industry} regulations and standards (e.g. HIPAA for Healthcare,
   </script>
 
 </body>
-</html></pre>
-        </body>
-    </html>
+</html>
