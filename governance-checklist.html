@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Governance Checklist | CareerForge AI</title>
+<meta name="description" content="Generate a tailored AI governance checklist for your project. Select industry and risk level to get actionable items instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;min-height:100vh}
+body{background:#0D1B2A;color:#E8E4DC;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6}
+a{color:#4ECDC4;text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,.logo,.nav-links,.field-label,.btn-generate,.btn-sm,.btn-export,.eyebrow,.badge,.section-title,.progress-text,.loading-msg,.footer-links,.footer-copy{font-family:'Space Grotesk',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* HEADER */
+header{background:#0D1B2A;border-bottom:2px solid #E8A24B;position:sticky;top:0;z-index:100;margin:0;padding:0}
+.nav{max-width:860px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;font-size:1.25rem;color:#fff;letter-spacing:-.02em;text-decoration:none}
+.logo span{color:#E8A24B}
+.nav-links{list-style:none;display:flex;gap:24px;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.nav-links a{color:#9BAABB;text-decoration:none}
+.nav-links a:hover{color:#E8A24B}
+
+/* HERO */
+.hero{background:#1A2D42;border-bottom:1px solid #2E4A63;padding:48px 0 40px;margin:0}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:#E8A24B;display:block;margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.hero h1{font-weight:700;font-size:2rem;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:12px}
+.hero p{color:#9BAABB;max-width:580px;font-size:.95rem}
+
+/* BODY */
+.body{padding:40px 0 72px;margin:0}
+
+/* INPUT CARD */
+.input-card{background:#1A2D42;border:1px solid #2E4A63;border-radius:8px;padding:32px;margin-bottom:24px}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.field-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#4ECDC4;display:block;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+select{width:100%;font-family:Georgia,serif;font-size:.93rem;padding:13px 16px;background:#0D1B2A;border:1.5px solid #2E4A63;border-radius:5px;color:#E8E4DC;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239BAABB' d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+select:focus{outline:none;border-color:#4ECDC4}
+select option{background:#1A2D42}
+.risk-pill{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:20px;transition:all .2s}
+.risk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pill-low{background:rgba(76,175,125,.12);color:#4CAF7D;border:1px solid rgba(76,175,125,.28)}
+.pill-low .risk-dot{background:#4CAF7D}
+.pill-medium{background:rgba(232,131,75,.12);color:#E8834B;border:1px solid rgba(232,131,75,.28)}
+.pill-medium .risk-dot{background:#E8834B}
+.pill-high{background:rgba(224,82,82,.12);color:#E05252;border:1px solid rgba(224,82,82,.28)}
+.pill-high .risk-dot{background:#E05252}
+
+/* BUTTON */
+.btn-generate{font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500;background:#E8A24B;color:#0D1B2A;border:none;padding:15px 32px;border-radius:5px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:background .15s,transform .1s}
+.btn-generate:hover:not(:disabled){background:#F0B866;transform:translateY(-1px)}
+.btn-generate:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* LOADING */
+.loading{display:none;background:#1A2D42;border:1px solid #2E4A63;border-radius:8px;padding:40px;text-align:center;margin-bottom:24px}
+.loading.show{display:block}
+.spinner{width:32px;height:32px;border:3px solid #2E4A63;border-top-color:#4ECDC4;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:#9BAABB}
+
+/* ERROR */
+.error-box{display:none;background:rgba(224,82,82,.1);border:1px solid #E05252;border-radius:5px;padding:14px 18px;color:#E05252;font-size:.88rem;margin-bottom:20px}
+.error-box.show{display:block}
+
+/* RESULTS */
+.results{display:none}
+.results.show{display:block}
+.results-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+.results-title{font-weight:700;font-size:1.05rem;color:#fff}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-sm{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;background:transparent;color:#9BAABB;border:1px solid #2E4A63;padding:7px 13px;border-radius:4px;cursor:pointer;transition:all .15s}
+.btn-sm:hover{border-color:#4ECDC4;color:#4ECDC4}
+.btn-export{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em;background:transparent;color:#E8A24B;border:1px solid rgba(232,162,75,.35);padding:7px 13px;border-radius:4px;cursor:pointer;transition:all .15s}
+.btn-export:hover{background:rgba(232,162,75,.08);border-color:#E8A24B}
+
+/* PROGRESS */
+.progress-wrap{background:#1A2D42;border:1px solid #2E4A63;border-radius:6px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.progress-track{flex:1;height:5px;background:#2E4A63;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:#4ECDC4;border-radius:3px;width:0%;transition:width .3s ease}
+.progress-text{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#9BAABB;white-space:nowrap}
+.progress-num{color:#4ECDC4;font-weight:500}
+
+/* CHECKLIST SECTIONS */
+.cl-section{background:#1A2D42;border:1px solid #2E4A63;border-radius:8px;margin-bottom:12px;overflow:hidden}
+.cl-header{display:flex;align-items:center;gap:12px;padding:15px 20px;cursor:pointer;border-bottom:1px solid #2E4A63;transition:background .15s;user-select:none}
+.cl-header:hover{background:#213650}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:3px;white-space:nowrap}
+.b1{background:rgba(78,205,196,.1);color:#4ECDC4;border:1px solid rgba(78,205,196,.25)}
+.b2{background:rgba(224,82,82,.1);color:#E05252;border:1px solid rgba(224,82,82,.25)}
+.b3{background:rgba(232,162,75,.1);color:#E8A24B;border:1px solid rgba(232,162,75,.25)}
+.b4{background:rgba(160,122,232,.1);color:#A07AE8;border:1px solid rgba(160,122,232,.25)}
+.b5{background:rgba(76,175,125,.1);color:#4CAF7D;border:1px solid rgba(76,175,125,.25)}
+.b6{background:rgba(224,82,82,.08);color:#F08080;border:1px solid rgba(224,82,82,.18)}
+.section-title{font-weight:500;font-size:.9rem;color:#fff;flex:1}
+.section-count{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#9BAABB}
+.section-arrow{color:#9BAABB;font-size:.7rem;transition:transform .2s}
+.section-arrow.open{transform:rotate(180deg)}
+.cl-items{padding:4px 0}
+.cl-items.hidden{display:none}
+
+/* ITEMS */
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:11px 20px;border-bottom:1px solid rgba(46,74,99,.35);cursor:pointer;transition:background .12s}
+.cl-item:last-child{border-bottom:none}
+.cl-item:hover{background:rgba(33,54,80,.6)}
+.cl-item.done{background:rgba(76,175,125,.04)}
+.cb{width:17px;height:17px;border:2px solid #2E4A63;border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:#0D1B2A}
+.cl-item.done .cb{background:#4CAF7D;border-color:#4CAF7D}
+.cb-tick{display:none;color:#0D1B2A;font-size:10px;font-weight:800;line-height:1}
+.cl-item.done .cb-tick{display:block}
+.cl-text{font-size:.87rem;color:#E8E4DC;line-height:1.55;flex:1;transition:color .15s}
+.cl-item.done .cl-text{color:#9BAABB;text-decoration:line-through;text-decoration-color:rgba(155,170,187,.4)}
+.cl-pri{font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:2px;flex-shrink:0;margin-top:3px}
+.ph{background:rgba(224,82,82,.12);color:#E05252;border:1px solid rgba(224,82,82,.28)}
+.pm{background:rgba(232,131,75,.12);color:#E8834B;border:1px solid rgba(232,131,75,.28)}
+.pl{background:rgba(76,175,125,.1);color:#4CAF7D;border:1px solid rgba(76,175,125,.25)}
+
+/* FOOTER */
+footer{background:#1A2D42;border-top:1px solid #2E4A63;padding:32px 0;margin:0}
+.footer-inner{max-width:860px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-logo{font-weight:700;font-size:1.05rem;color:#fff}
+.footer-logo span{color:#E8A24B}
+.footer-links{list-style:none;display:flex;gap:20px;font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.06em}
+.footer-links a{color:#9BAABB;text-decoration:none}
+.footer-links a:hover{color:#4ECDC4}
+.footer-copy{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:#9BAABB}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.6rem}
+  .input-row{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+  .nav-links{display:none}
+  .results-top{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="index.html" class="logo">CareerForge<span>AI</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#blog">Guides</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Tool — AI Governance</span>
+    <h1>AI Governance Checklist</h1>
+    <p>Select your industry and risk level to generate a tailored AI governance checklist. Tick off items as you complete them and export your progress for stakeholder reporting.</p>
+  </div>
+</section>
+
+<section class="body">
+  <div class="container">
+
+    <div class="input-card">
+      <div class="input-row">
+        <div>
+          <label class="field-label" for="industry">Industry / Project Type</label>
+          <select id="industry">
+            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
+            <option value="Retail">Retail</option>
+            <option value="Legal">Legal</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for="risk">Risk Level</label>
+          <select id="risk">
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+          </select>
+          <div id="risk-pill" class="risk-pill pill-medium">
+            <span class="risk-dot"></span>
+            <span id="pill-text">Medium Risk</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn-generate" id="gen-btn">
+        <span>⚡</span> Generate Checklist
+      </button>
+    </div>
+
+    <div class="error-box" id="err"></div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p class="loading-msg" id="loading-msg">Generating checklist...</p>
+    </div>
+
+    <div class="results" id="results">
+      <div class="results-top">
+        <span class="results-title">Governance Checklist</span>
+        <div class="actions">
+          <button class="btn-sm" id="toggle-btn">Collapse all</button>
+          <button class="btn-sm" id="reset-btn">Reset</button>
+          <button class="btn-export" id="export-btn">Export report</button>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+        <span class="progress-text"><span class="progress-num" id="pnum">0</span> / <span id="ptotal">0</span> completed</span>
+      </div>
+      <div id="cl-container"></div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">CareerForge<span>AI</span></span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="process-mapper.html">Process Mapper</a></li>
+      <li><a href="prompt-library.html">Prompt Library</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 CareerForge AI</span>
+  </div>
+</footer>
+
+<script>
+// =============================================
+// API KEY
+// =============================================
+const OPENAI_API_KEY = "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";
+
+// =============================================
+// Section config
+// =============================================
+const SECTIONS = [
+  { key:"DATA_PRIVACY",    label:"Data Privacy Requirements",    badge:"b1", short:"Privacy"    },
+  { key:"BIAS_CHECKS",     label:"Bias and Fairness Checks",     badge:"b2", short:"Bias"       },
+  { key:"HUMAN_OVERSIGHT", label:"Human Oversight Requirements", badge:"b3", short:"Oversight"  },
+  { key:"REGULATORY",      label:"Regulatory Compliance",        badge:"b4", short:"Regulatory" },
+  { key:"AUDIT",           label:"Audit and Monitoring",         badge:"b5", short:"Audit"      },
+  { key:"RISK_MITIGATION", label:"Risk Mitigation",              badge:"b6", short:"Risk"       },
+];
+
+const MSGS = [
+  "Generating checklist...",
+  "Analysing regulatory requirements...",
+  "Mapping bias and fairness checks...",
+  "Building oversight requirements...",
+  "Finalising risk items...",
+];
+
+// =============================================
+// Risk pill
+// =============================================
+document.getElementById("risk").addEventListener("change", function() {
+  updatePill(this.value);
+});
+
+function updatePill(val) {
+  var pill = document.getElementById("risk-pill");
+  var txt  = document.getElementById("pill-text");
+  pill.className = "risk-pill pill-" + val.toLowerCase();
+  txt.textContent = val + " Risk";
+}
+
+updatePill("Medium");
+
+// =============================================
+// Progress
+// =============================================
+function refreshProgress() {
+  var all   = document.querySelectorAll(".cl-item");
+  var done  = document.querySelectorAll(".cl-item.done");
+  var total = all.length;
+  var n     = done.length;
+  var pct   = total ? Math.round((n / total) * 100) : 0;
+
+  document.getElementById("pfill").style.width = pct + "%";
+  document.getElementById("pnum").textContent  = n;
+  document.getElementById("ptotal").textContent = total;
+
+  for (var i = 0; i < SECTIONS.length; i++) {
+    var sec = document.getElementById("sec-" + i);
+    if (!sec) continue;
+    var sAll  = sec.querySelectorAll(".cl-item").length;
+    var sDone = sec.querySelectorAll(".cl-item.done").length;
+    var cnt   = sec.querySelector(".section-count");
+    if (cnt) cnt.textContent = sDone + "/" + sAll;
+  }
+}
+
+// =============================================
+// Build item
+// =============================================
+function makeItem(text, priority) {
+  var div = document.createElement("div");
+  div.className = "cl-item";
+  var pc = priority === "High" ? "ph" : priority === "Low" ? "pl" : "pm";
+  div.innerHTML =
+    '<div class="cb"><span class="cb-tick">✓</span></div>' +
+    '<span class="cl-text">' + escHtml(text) + '</span>' +
+    '<span class="cl-pri ' + pc + '">' + priority + '</span>';
+  div.addEventListener("click", function() {
+    div.classList.toggle("done");
+    refreshProgress();
+  });
+  return div;
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// =============================================
+// Build section
+// =============================================
+function makeSection(section, items, idx) {
+  var wrap = document.createElement("div");
+  wrap.className = "cl-section";
+  wrap.id = "sec-" + idx;
+
+  var hdr = document.createElement("div");
+  hdr.className = "cl-header";
+  hdr.innerHTML =
+    '<span class="badge ' + section.badge + '">' + section.short + '</span>' +
+    '<span class="section-title">' + section.label + '</span>' +
+    '<span class="section-count">0/' + items.length + '</span>' +
+    '<span class="section-arrow open" id="arr-' + idx + '">▼</span>';
+
+  var body = document.createElement("div");
+  body.className = "cl-items";
+  body.id = "items-" + idx;
+
+  for (var i = 0; i < items.length; i++) {
+    body.appendChild(makeItem(items[i].text, items[i].priority));
+  }
+
+  (function(b, id) {
+    hdr.addEventListener("click", function() {
+      b.classList.toggle("hidden");
+      var a = document.getElementById(id);
+      if (a) a.classList.toggle("open");
+    });
+  })(body, "arr-" + idx);
+
+  wrap.appendChild(hdr);
+  wrap.appendChild(body);
+  return wrap;
+}
+
+// =============================================
+// Parse response
+// =============================================
+function parseResponse(text) {
+  var out = {};
+  for (var i = 0; i < SECTIONS.length; i++) {
+    var s    = SECTIONS[i];
+    var next = SECTIONS[i + 1];
+    var re   = next
+      ? new RegExp(s.key + ":\\s*([\\s\\S]*?)(?=" + next.key + ":|$)", "i")
+      : new RegExp(s.key + ":\\s*([\\s\\S]*?)$", "i");
+    var m   = text.match(re);
+    var raw = m ? m[1].trim() : "";
+    var lines = raw.split("\n");
+    var items = [];
+    for (var j = 0; j < lines.length; j++) {
+      var line = lines[j].trim();
+      if (line.length < 5) continue;
+      var t = line.replace(/^[-•*\d.]+\s*/, "").trim();
+      var p = "Medium";
+      if (/\[high\]/i.test(t))   { p = "High";   t = t.replace(/\[high\]/i, "").trim(); }
+      if (/\[medium\]/i.test(t)) { p = "Medium"; t = t.replace(/\[medium\]/i, "").trim(); }
+      if (/\[low\]/i.test(t))    { p = "Low";    t = t.replace(/\[low\]/i, "").trim(); }
+      if (t.length > 5) items.push({ text: t, priority: p });
+    }
+    out[s.key] = items;
+  }
+  return out;
+}
+
+// =============================================
+// Generate
+// =============================================
+document.getElementById("gen-btn").addEventListener("click", async function() {
+  var industry = document.getElementById("industry").value;
+  var risk     = document.getElementById("risk").value;
+
+  document.getElementById("err").classList.remove("show");
+  document.getElementById("results").classList.remove("show");
+  document.getElementById("loading").classList.add("show");
+  document.getElementById("gen-btn").disabled = true;
+
+  var mi = 0;
+  var ticker = setInterval(function() {
+    mi = (mi + 1) % MSGS.length;
+    document.getElementById("loading-msg").textContent = MSGS[mi];
+  }, 1800);
+
+  var prompt = "You are a senior AI governance expert. Generate a detailed AI governance checklist for a " + risk + " risk " + industry + " AI project.\n\n" +
+    "For each section, provide 5-7 specific, actionable checklist items tailored to " + industry + " and " + risk + " risk. Each item must end with a priority tag: [High], [Medium], or [Low].\n\n" +
+    "Respond in EXACTLY this format:\n\n" +
+    "DATA_PRIVACY:\n- item text [High/Medium/Low]\n\n" +
+    "BIAS_CHECKS:\n- item text [High/Medium/Low]\n\n" +
+    "HUMAN_OVERSIGHT:\n- item text [High/Medium/Low]\n\n" +
+    "REGULATORY:\n- item text [High/Medium/Low]\n\n" +
+    "AUDIT:\n- item text [High/Medium/Low]\n\n" +
+    "RISK_MITIGATION:\n- item text [High/Medium/Low]\n\n" +
+    "Be specific to " + industry + " regulations (e.g. HIPAA, GDPR, FCA). Items must be concrete and testable.";
+
+  try {
+    var res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + OPENAI_API_KEY
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        max_tokens: 1800,
+        temperature: 0.3,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    clearInterval(ticker);
+    var data = await res.json();
+
+    if (data.error) {
+      showErr("OpenAI error: " + data.error.message);
+      return;
+    }
+
+    var parsed = parseResponse(data.choices[0].message.content);
+    var cont   = document.getElementById("cl-container");
+    cont.innerHTML = "";
+
+    for (var i = 0; i < SECTIONS.length; i++) {
+      var items = parsed[SECTIONS[i].key] || [];
+      if (items.length) cont.appendChild(makeSection(SECTIONS[i], items, i));
+    }
+
+    document.getElementById("loading").classList.remove("show");
+    document.getElementById("gen-btn").disabled = false;
+    document.getElementById("results").classList.add("show");
+    document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    refreshProgress();
+
+  } catch(e) {
+    clearInterval(ticker);
+    showErr("Network error: " + e.message);
+  }
+});
+
+function showErr(msg) {
+  document.getElementById("loading").classList.remove("show");
+  document.getElementById("gen-btn").disabled = false;
+  var el = document.getElementById("err");
+  el.textContent = msg;
+  el.classList.add("show");
+}
+
+// =============================================
+// Toggle / Reset / Export
+// =============================================
+var allCollapsed = false;
+
+document.getElementById("toggle-btn").addEventListener("click", function() {
+  allCollapsed = !allCollapsed;
+  var items = document.querySelectorAll(".cl-items");
+  for (var i = 0; i < items.length; i++) {
+    items[i].classList.toggle("hidden", allCollapsed);
+  }
+  var arrows = document.querySelectorAll(".section-arrow");
+  for (var i = 0; i < arrows.length; i++) {
+    arrows[i].classList.toggle("open", !allCollapsed);
+  }
+  this.textContent = allCollapsed ? "Expand all" : "Collapse all";
+});
+
+document.getElementById("reset-btn").addEventListener("click", function() {
+  var items = document.querySelectorAll(".cl-item");
+  for (var i = 0; i < items.length; i++) items[i].classList.remove("done");
+  refreshProgress();
+});
+
+document.getElementById("export-btn").addEventListener("click", function() {
+  var industry = document.getElementById("industry").value;
+  var risk     = document.getElementById("risk").value;
+  var done     = document.querySelectorAll(".cl-item.done").length;
+  var total    = document.querySelectorAll(".cl-item").length;
+  var pct      = total ? Math.round((done / total) * 100) : 0;
+  var date     = new Date().toLocaleDateString("en-GB");
+
+  var out = "AI GOVERNANCE CHECKLIST REPORT\n" + "=".repeat(48) + "\n";
+  out += "Industry: " + industry + " | Risk: " + risk + " | Date: " + date + "\n";
+  out += "Completion: " + done + "/" + total + " items (" + pct + "%)\n";
+
+  for (var i = 0; i < SECTIONS.length; i++) {
+    var sec = document.getElementById("sec-" + i);
+    if (!sec) continue;
+    out += "\n" + SECTIONS[i].label.toUpperCase() + "\n" + "-".repeat(36) + "\n";
+    var clItems = sec.querySelectorAll(".cl-item");
+    for (var j = 0; j < clItems.length; j++) {
+      var item    = clItems[j];
+      var checked = item.classList.contains("done") ? "[✓]" : "[ ]";
+      var text    = item.querySelector(".cl-text").textContent;
+      var pri     = item.querySelector(".cl-pri").textContent;
+      out += checked + " [" + pri + "] " + text + "\n";
+    }
+  }
+
+  navigator.clipboard.writeText(out).then(function() {
+    var btn = document.getElementById("export-btn");
+    btn.textContent = "Copied!";
+    setTimeout(function() { btn.textContent = "Export report"; }, 2000);
+  });
+});
+</script>
+
+</body>
+</html>
