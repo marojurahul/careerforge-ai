@@ -1,0 +1,738 @@
+<html>
+        <head><title>Downloaded HTML</title></head>
+        <body>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Governance Checklist | CareerForge AI</title>
+  <meta name="description" content="Generate a tailored AI governance checklist for your project. Select industry and risk level to get actionable checklist items instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #0D1B2A;
+      --card:        #1A2D42;
+      --card-hover:  #213650;
+      --border:      #2E4A63;
+      --amber:       #E8A24B;
+      --amber-light: #F0B866;
+      --teal:        #4ECDC4;
+      --white:       #FFFFFF;
+      --text:        #E8E4DC;
+      --muted:       #9BAABB;
+      --green:       #4CAF7D;
+      --red:         #E05252;
+      --orange:      #E8834B;
+
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Source Serif 4', serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* --- Header --- */
+    header {
+      background: var(--bg);
+      border-bottom: 2px solid var(--amber);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav {
+      max-width: 860px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--white); }
+    .logo span { color: var(--amber); }
+    .nav-links { list-style: none; display: flex; gap: 28px; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--amber); text-decoration: none; }
+
+    /* --- Hero --- */
+    .hero { background: var(--card); border-bottom: 1px solid var(--border); padding: 48px 0 40px; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--amber); display: block; margin-bottom: 10px; }
+    .hero h1 { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 12px; }
+    .hero p { color: var(--muted); max-width: 580px; font-size: 0.97rem; }
+
+    /* --- Body --- */
+    .body { padding: 40px 0 72px; }
+
+    /* --- Input Card --- */
+    .input-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+
+    select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      padding: 13px 16px;
+      background: #0D1B2A;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239BAABB' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    select:focus { outline: none; border-color: var(--teal); }
+    select option { background: var(--card); }
+
+    /* Risk pill */
+    .risk-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+    .risk-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .risk-low    { background: rgba(76,175,125,0.15); color: var(--green);  border: 1px solid rgba(76,175,125,0.3); }
+    .risk-low .risk-dot    { background: var(--green); }
+    .risk-medium { background: rgba(232,131,75,0.15);  color: var(--orange); border: 1px solid rgba(232,131,75,0.3); }
+    .risk-medium .risk-dot { background: var(--orange); }
+    .risk-high   { background: rgba(224,82,82,0.15);  color: var(--red);    border: 1px solid rgba(224,82,82,0.3); }
+    .risk-high .risk-dot   { background: var(--red); }
+
+    /* Generate button */
+    .btn-generate {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      background: var(--amber);
+      color: var(--bg);
+      border: none;
+      padding: 15px 34px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-generate:hover:not(:disabled) { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-generate:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    /* --- Loading --- */
+    .loading {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .loading.show { display: block; }
+    .spinner {
+      width: 34px; height: 34px;
+      border: 3px solid var(--border);
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 14px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-msg { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+    /* --- Error --- */
+    .error {
+      display: none;
+      background: rgba(224,82,82,0.1);
+      border: 1px solid var(--red);
+      border-radius: 5px;
+      padding: 14px 18px;
+      color: var(--red);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+    .error.show { display: block; }
+
+    /* --- Results --- */
+    .results { display: none; }
+    .results.show { display: block; }
+
+    .results-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .results-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); }
+
+    .btn-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-export {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: var(--amber);
+      border: 1px solid rgba(232,162,75,0.35);
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-export:hover { background: rgba(232,162,75,0.08); border-color: var(--amber); }
+
+    /* Progress */
+    .progress-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .progress-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--teal); border-radius: 3px; width: 0%; transition: width 0.3s ease; }
+    .progress-text { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
+    .progress-num { color: var(--teal); font-weight: 500; }
+
+    /* Checklist sections */
+    .cl-section { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+
+    .cl-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      user-select: none;
+    }
+    .cl-header:hover { background: var(--card-hover); }
+
+    .cl-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .b1 { background: rgba(78,205,196,0.1);  color: var(--teal);   border: 1px solid rgba(78,205,196,0.25); }
+    .b2 { background: rgba(224,82,82,0.1);   color: var(--red);    border: 1px solid rgba(224,82,82,0.25); }
+    .b3 { background: rgba(232,162,75,0.1);  color: var(--amber);  border: 1px solid rgba(232,162,75,0.25); }
+    .b4 { background: rgba(160,122,232,0.1); color: #A07AE8;       border: 1px solid rgba(160,122,232,0.25); }
+    .b5 { background: rgba(76,175,125,0.1);  color: var(--green);  border: 1px solid rgba(76,175,125,0.25); }
+    .b6 { background: rgba(224,82,82,0.08);  color: #F08080;       border: 1px solid rgba(224,82,82,0.18); }
+
+    .cl-title { font-family: var(--font-display); font-size: 0.92rem; color: var(--white); flex: 1; }
+    .cl-count { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+    .cl-arrow { color: var(--muted); font-size: 0.72rem; transition: transform 0.2s; }
+    .cl-arrow.open { transform: rotate(180deg); }
+
+    .cl-items { padding: 4px 0; }
+    .cl-items.hidden { display: none; }
+
+    /* Individual items */
+    .cl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 11px 20px;
+      border-bottom: 1px solid rgba(46,74,99,0.35);
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-item:hover { background: rgba(33,54,80,0.6); }
+    .cl-item.done { background: rgba(76,175,125,0.04); }
+
+    .cb {
+      width: 17px; height: 17px;
+      border: 2px solid var(--border);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+      background: var(--bg);
+    }
+    .cl-item.done .cb { background: var(--green); border-color: var(--green); }
+    .cb-tick { display: none; color: var(--bg); font-size: 10px; font-weight: 800; }
+    .cl-item.done .cb-tick { display: block; }
+
+    .cl-text { font-size: 0.88rem; color: var(--text); line-height: 1.55; flex: 1; transition: color 0.15s; }
+    .cl-item.done .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(155,170,187,0.4); }
+
+    .cl-priority {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .p-high   { background: rgba(224,82,82,0.12);  color: var(--red);    border: 1px solid rgba(224,82,82,0.28); }
+    .p-medium { background: rgba(232,131,75,0.12); color: var(--orange); border: 1px solid rgba(232,131,75,0.28); }
+    .p-low    { background: rgba(76,175,125,0.1);  color: var(--green);  border: 1px solid rgba(76,175,125,0.25); }
+
+    /* --- Footer --- */
+    footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
+    .footer-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--white); }
+    .footer-logo span { color: var(--amber); }
+    .footer-links { list-style: none; display: flex; gap: 22px; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--teal); text-decoration: none; }
+    .footer-copy { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.65rem; }
+      .input-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 14px; text-align: center; }
+      .nav-links { display: none; }
+      .results-top { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="index.html" class="logo">CareerForge<span>AI</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="index.html#blog">Guides</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Tool — AI Governance</span>
+      <h1>AI Governance Checklist</h1>
+      <p>Select your industry and risk level to generate a tailored AI governance checklist. Tick off items as you complete them and export your progress for stakeholder reporting.</p>
+    </div>
+  </section>
+
+  <section class="body">
+    <div class="container">
+
+      <div class="input-card">
+        <div class="input-row">
+          <div>
+            <label class="field-label" for="industry">Industry / Project Type</label>
+            <select id="industry">
+              <option value="Healthcare">Healthcare</option>
+              <option value="Finance">Finance</option>
+              <option value="Retail">Retail</option>
+              <option value="Legal">Legal</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="risk">Risk Level</label>
+            <select id="risk">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+            <div id="risk-pill" class="risk-pill risk-medium">
+              <span class="risk-dot"></span>
+              <span id="risk-pill-text">Medium Risk</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-generate" id="gen-btn">
+          <span>⚡</span> Generate Checklist
+        </button>
+      </div>
+
+      <div class="error" id="error"></div>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p class="loading-msg" id="loading-msg">Generating checklist...</p>
+      </div>
+
+      <div class="results" id="results">
+        <div class="results-top">
+          <span class="results-title">Governance Checklist</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-secondary" id="toggle-btn">Collapse all</button>
+            <button class="btn-secondary" id="reset-btn">Reset</button>
+            <button class="btn-export" id="export-btn">Export report</button>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+          <span class="progress-text"><span class="progress-num" id="pnum">0</span> / <span id="ptotal">0</span> completed</span>
+        </div>
+
+        <div id="cl-container"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">CareerForge<span>AI</span></span>
+      <ul class="footer-links">
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="process-mapper.html">Process Mapper</a></li>
+        <li><a href="requirements-generator.html">Requirements</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 CareerForge AI</span>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // API KEY — replace with your OpenAI key
+    // ============================================
+    const OPENAI_API_KEY = "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";
+
+    // ============================================
+    // Section config
+    // ============================================
+    const SECTIONS = [
+      { key: "DATA_PRIVACY",    label: "Data Privacy Requirements",    badge: "b1", short: "Privacy"    },
+      { key: "BIAS_CHECKS",     label: "Bias and Fairness Checks",     badge: "b2", short: "Bias"       },
+      { key: "HUMAN_OVERSIGHT", label: "Human Oversight Requirements", badge: "b3", short: "Oversight"  },
+      { key: "REGULATORY",      label: "Regulatory Compliance",        badge: "b4", short: "Regulatory" },
+      { key: "AUDIT",           label: "Audit and Monitoring",         badge: "b5", short: "Audit"      },
+      { key: "RISK_MITIGATION", label: "Risk Mitigation",              badge: "b6", short: "Risk"       },
+    ];
+
+    const MSGS = [
+      "Generating checklist...",
+      "Analysing regulatory requirements...",
+      "Mapping bias and fairness checks...",
+      "Building oversight requirements...",
+      "Finalising risk items...",
+    ];
+
+    // ============================================
+    // Risk pill update
+    // ============================================
+    const riskEl = document.getElementById("risk");
+    function updatePill(val) {
+      const pill = document.getElementById("risk-pill");
+      const txt  = document.getElementById("risk-pill-text");
+      pill.className = "risk-pill risk-" + val.toLowerCase();
+      txt.textContent = val + " Risk";
+    }
+    riskEl.addEventListener("change", () => updatePill(riskEl.value));
+    updatePill("Medium");
+
+    // ============================================
+    // Progress
+    // ============================================
+    function refreshProgress() {
+      const all   = document.querySelectorAll(".cl-item");
+      const done  = document.querySelectorAll(".cl-item.done");
+      const total = all.length;
+      const n     = done.length;
+      const pct   = total ? Math.round((n / total) * 100) : 0;
+
+      document.getElementById("pfill").style.width = pct + "%";
+      document.getElementById("pnum").textContent  = n;
+      document.getElementById("ptotal").textContent = total;
+
+      // Per-section counts
+      SECTIONS.forEach((s, i) => {
+        const sec = document.getElementById("sec-" + i);
+        if (!sec) return;
+        const sAll  = sec.querySelectorAll(".cl-item").length;
+        const sDone = sec.querySelectorAll(".cl-item.done").length;
+        const cnt   = sec.querySelector(".cl-count");
+        if (cnt) cnt.textContent = sDone + "/" + sAll;
+      });
+    }
+
+    // ============================================
+    // Build item
+    // ============================================
+    function makeItem(text, priority) {
+      const div = document.createElement("div");
+      div.className = "cl-item";
+      const pc = priority === "High" ? "p-high" : priority === "Low" ? "p-low" : "p-medium";
+      div.innerHTML = `
+        <div class="cb"><span class="cb-tick">✓</span></div>
+        <span class="cl-text">${text}</span>
+        <span class="cl-priority ${pc}">${priority}</span>
+      `;
+      div.addEventListener("click", () => {
+        div.classList.toggle("done");
+        refreshProgress();
+      });
+      return div;
+    }
+
+    // ============================================
+    // Build section
+    // ============================================
+    function makeSection(section, items, idx) {
+      const wrap = document.createElement("div");
+      wrap.className = "cl-section";
+      wrap.id = "sec-" + idx;
+
+      const hdr = document.createElement("div");
+      hdr.className = "cl-header";
+      hdr.innerHTML = `
+        <span class="cl-badge ${section.badge}">${section.short}</span>
+        <span class="cl-title">${section.label}</span>
+        <span class="cl-count">0/${items.length}</span>
+        <span class="cl-arrow open" id="arr-${idx}">▼</span>
+      `;
+
+      const body = document.createElement("div");
+      body.className = "cl-items";
+      body.id = "items-" + idx;
+      items.forEach(it => body.appendChild(makeItem(it.text, it.priority)));
+
+      hdr.addEventListener("click", () => {
+        body.classList.toggle("hidden");
+        document.getElementById("arr-" + idx).classList.toggle("open");
+      });
+
+      wrap.appendChild(hdr);
+      wrap.appendChild(body);
+      return wrap;
+    }
+
+    // ============================================
+    // Parse response
+    // ============================================
+    function parse(text) {
+      const out = {};
+      SECTIONS.forEach((s, i) => {
+        const next = SECTIONS[i + 1];
+        const re = next
+          ? new RegExp(s.key + ":\\s*([\\s\\S]*?)(?=" + next.key + ":|$)", "i")
+          : new RegExp(s.key + ":\\s*([\\s\\S]*?)$", "i");
+        const m = text.match(re);
+        const raw = m ? m[1].trim() : "";
+        out[s.key] = raw.split("\n").map(l => l.trim()).filter(l => l.length > 4).map(line => {
+          let t = line.replace(/^[-•*\d.]+\s*/, "").trim();
+          let p = "Medium";
+          if (/\[high\]/i.test(t))   { p = "High";   t = t.replace(/\[high\]/i, "").trim(); }
+          if (/\[medium\]/i.test(t)) { p = "Medium"; t = t.replace(/\[medium\]/i, "").trim(); }
+          if (/\[low\]/i.test(t))    { p = "Low";    t = t.replace(/\[low\]/i, "").trim(); }
+          return { text: t, priority: p };
+        }).filter(it => it.text.length > 5);
+      });
+      return out;
+    }
+
+    // ============================================
+    // Generate
+    // ============================================
+    document.getElementById("gen-btn").addEventListener("click", async () => {
+      const industry = document.getElementById("industry").value;
+      const risk     = document.getElementById("risk").value;
+
+      document.getElementById("error").classList.remove("show");
+      document.getElementById("results").classList.remove("show");
+      document.getElementById("loading").classList.add("show");
+      document.getElementById("gen-btn").disabled = true;
+
+      let mi = 0;
+      const ticker = setInterval(() => {
+        mi = (mi + 1) % MSGS.length;
+        document.getElementById("loading-msg").textContent = MSGS[mi];
+      }, 1800);
+
+      const prompt = `You are a senior AI governance expert. Generate a detailed AI governance checklist for a ${risk} risk ${industry} AI project.
+
+For each section, provide 5-7 specific, actionable checklist items tailored to ${industry} and ${risk} risk. Each item must end with a priority tag: [High], [Medium], or [Low].
+
+Respond in EXACTLY this format:
+
+DATA_PRIVACY:
+- item text [High/Medium/Low]
+
+BIAS_CHECKS:
+- item text [High/Medium/Low]
+
+HUMAN_OVERSIGHT:
+- item text [High/Medium/Low]
+
+REGULATORY:
+- item text [High/Medium/Low]
+
+AUDIT:
+- item text [High/Medium/Low]
+
+RISK_MITIGATION:
+- item text [High/Medium/Low]
+
+Be specific to ${industry} regulations (e.g. HIPAA, GDPR, FCA, CCPA). Items must be concrete and testable, not generic.`;
+
+      try {
+        const res  = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + OPENAI_API_KEY
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            max_tokens: 1800,
+            temperature: 0.3,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+
+        clearInterval(ticker);
+        const data = await res.json();
+
+        if (data.error) {
+          showErr("OpenAI error: " + data.error.message);
+          return;
+        }
+
+        const parsed = parse(data.choices[0].message.content);
+        const cont   = document.getElementById("cl-container");
+        cont.innerHTML = "";
+
+        SECTIONS.forEach((s, i) => {
+          const items = parsed[s.key] || [];
+          if (items.length) cont.appendChild(makeSection(s, items, i));
+        });
+
+        document.getElementById("loading").classList.remove("show");
+        document.getElementById("gen-btn").disabled = false;
+        document.getElementById("results").classList.add("show");
+        document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+        refreshProgress();
+
+      } catch (e) {
+        clearInterval(ticker);
+        showErr("Network error: " + e.message);
+      }
+    });
+
+    function showErr(msg) {
+      document.getElementById("loading").classList.remove("show");
+      document.getElementById("gen-btn").disabled = false;
+      const el = document.getElementById("error");
+      el.textContent = msg;
+      el.classList.add("show");
+    }
+
+    // ============================================
+    // Toggle / Reset / Export
+    // ============================================
+    let collapsed = false;
+    document.getElementById("toggle-btn").addEventListener("click", () => {
+      collapsed = !collapsed;
+      document.querySelectorAll(".cl-items").forEach(el => el.classList.toggle("hidden", collapsed));
+      document.querySelectorAll(".cl-arrow").forEach(el => el.classList.toggle("open", !collapsed));
+      document.getElementById("toggle-btn").textContent = collapsed ? "Expand all" : "Collapse all";
+    });
+
+    document.getElementById("reset-btn").addEventListener("click", () => {
+      document.querySelectorAll(".cl-item").forEach(el => el.classList.remove("done"));
+      refreshProgress();
+    });
+
+    document.getElementById("export-btn").addEventListener("click", () => {
+      const industry = document.getElementById("industry").value;
+      const risk     = document.getElementById("risk").value;
+      const done     = document.querySelectorAll(".cl-item.done").length;
+      const total    = document.querySelectorAll(".cl-item").length;
+      const pct      = total ? Math.round((done / total) * 100) : 0;
+      const date     = new Date().toLocaleDateString("en-GB");
+
+      let out = `AI GOVERNANCE CHECKLIST REPORT\n${"=".repeat(48)}\n`;
+      out += `Industry: ${industry} | Risk: ${risk} | Date: ${date}\n`;
+      out += `Completion: ${done}/${total} items (${pct}%)\n`;
+
+      SECTIONS.forEach((s, i) => {
+        const sec = document.getElementById("sec-" + i);
+        if (!sec) return;
+        out += `\n${s.label.toUpperCase()}\n${"-".repeat(36)}\n`;
+        sec.querySelectorAll(".cl-item").forEach(item => {
+          const checked  = item.classList.contains("done") ? "[✓]" : "[ ]";
+          const text     = item.querySelector(".cl-text").textContent;
+          const priority = item.querySelector(".cl-priority").textContent;
+          out += `${checked} [${priority}] ${text}\n`;
+        });
+      });
+
+      navigator.clipboard.writeText(out).then(() => {
+        const btn = document.getElementById("export-btn");
+        const orig = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => { btn.textContent = orig; }, 2000);
+      });
+    });
+  </script>
+
+</body>
+</html></pre>
+        </body>
+    </html>
