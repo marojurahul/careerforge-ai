@@ -416,29 +416,21 @@ document.getElementById("gen-btn").addEventListener("click", async function() {
     "Be specific to " + industry + " regulations (e.g. HIPAA, GDPR, FCA). Items must be concrete and testable.";
 
   try {
-    var res = await fetch("https://api.openai.com/v1/chat/completions", {
+  var res = await fetch("/.netlify/functions/governance", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + OPENAI_API_KEY
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        max_tokens: 1800,
-        temperature: 0.3,
-        messages: [{ role: "user", content: prompt }]
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ industry: industry, risk: risk })
     });
 
     clearInterval(ticker);
     var data = await res.json();
 
     if (data.error) {
-      showErr("OpenAI error: " + data.error.message);
+      showErr("Error: " + data.error);
       return;
     }
 
-    var parsed = parseResponse(data.choices[0].message.content);
+    var parsed = parseResponse(data.result);
     var cont   = document.getElementById("cl-container");
     cont.innerHTML = "";
 
