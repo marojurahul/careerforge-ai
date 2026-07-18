@@ -4,27 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Governance Checklist | CareerForge AI</title>
-  <meta name="description" content="Free AI governance checklist generator for business analysts. Select your project type and risk level to get a tailored governance checklist instantly.">
+  <meta name="description" content="Generate a tailored AI governance checklist for your project. Select industry and risk level to get actionable checklist items instantly.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy:        #0D1B2A;
-      --navy-mid:    #1A2D42;
-      --navy-light:  #243B55;
-      --navy-border: #2E4A63;
+      --bg:          #0D1B2A;
+      --card:        #1A2D42;
+      --card-hover:  #213650;
+      --border:      #2E4A63;
       --amber:       #E8A24B;
       --amber-light: #F0B866;
       --teal:        #4ECDC4;
-      --teal-dark:   #38B2AA;
-      --cream:       #F4F1EC;
       --white:       #FFFFFF;
-      --text-main:   #E8E4DC;
-      --text-muted:  #9BAABB;
+      --text:        #E8E4DC;
+      --muted:       #9BAABB;
+      --green:       #4CAF7D;
       --red:         #E05252;
       --orange:      #E8834B;
-      --green:       #4CAF7D;
-      --purple:      #A07AE8;
 
       --font-display: 'Space Grotesk', sans-serif;
       --font-body:    'Source Serif 4', serif;
@@ -35,337 +32,239 @@
     html { scroll-behavior: smooth; }
 
     body {
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--font-body);
-      background: var(--navy);
-      color: var(--text-main);
-      line-height: 1.6;
       font-size: 16px;
+      line-height: 1.6;
       min-height: 100vh;
     }
 
     a { color: var(--teal); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
-    /* ---------- Header ---------- */
+    /* --- Header --- */
     header {
-      background: var(--navy);
+      background: var(--bg);
       border-bottom: 2px solid var(--amber);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
     }
-
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 860px; margin: 0 auto; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
-    .logo {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--white);
-      letter-spacing: -0.02em;
-    }
-
+    .logo { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--white); }
     .logo span { color: var(--amber); }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .nav-links a { color: var(--text-muted); }
+    .nav-links { list-style: none; display: flex; gap: 28px; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .nav-links a { color: var(--muted); }
     .nav-links a:hover { color: var(--amber); text-decoration: none; }
 
-    /* ---------- Hero ---------- */
-    .tool-hero {
-      background: var(--navy-mid);
-      border-bottom: 1px solid var(--navy-border);
-      padding: 48px 0 40px;
-    }
+    /* --- Hero --- */
+    .hero { background: var(--card); border-bottom: 1px solid var(--border); padding: 48px 0 40px; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--amber); display: block; margin-bottom: 10px; }
+    .hero h1 { font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 12px; }
+    .hero p { color: var(--muted); max-width: 580px; font-size: 0.97rem; }
 
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--amber);
-      display: block;
-      margin-bottom: 10px;
-    }
+    /* --- Body --- */
+    .body { padding: 40px 0 72px; }
 
-    .tool-hero h1 {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      margin-bottom: 12px;
-      line-height: 1.15;
-    }
-
-    .tool-hero p {
-      color: var(--text-muted);
-      max-width: 620px;
-      font-size: 1rem;
-    }
-
-    /* ---------- Tool Body ---------- */
-    .tool-body { padding: 40px 0 64px; }
-
-    /* ---------- Input Panel ---------- */
-    .input-panel {
-      background: var(--navy-mid);
-      border: 1px solid var(--navy-border);
+    /* --- Input Card --- */
+    .input-card {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 32px;
-      margin-bottom: 24px;
-    }
-
-    .input-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
       margin-bottom: 24px;
     }
 
     .field-label {
       font-family: var(--font-mono);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: var(--teal);
       display: block;
       margin-bottom: 8px;
     }
 
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+
     select {
       width: 100%;
       font-family: var(--font-body);
       font-size: 0.95rem;
-      padding: 14px;
-      background: var(--navy-light);
-      border: 1.5px solid var(--navy-border);
+      padding: 13px 16px;
+      background: #0D1B2A;
+      border: 1.5px solid var(--border);
       border-radius: 5px;
-      color: var(--text-main);
-      transition: border-color 0.15s;
+      color: var(--text);
       cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239BAABB' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
     }
+    select:focus { outline: none; border-color: var(--teal); }
+    select option { background: var(--card); }
 
-    select:focus {
-      outline: none;
-      border-color: var(--teal);
-    }
-
-    select option { background: var(--navy-mid); }
-
-    /* Risk level visual indicator */
-    .risk-indicator {
-      display: flex;
-      gap: 8px;
+    /* Risk pill */
+    .risk-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       margin-top: 10px;
-    }
-
-    .risk-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--navy-border);
-      transition: background 0.2s;
-    }
-
-    .risk-dot.active-low    { background: var(--green); }
-    .risk-dot.active-medium { background: var(--orange); }
-    .risk-dot.active-high   { background: var(--red); }
-
-    .risk-label {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-left: 4px;
-    }
-
-    .risk-label.low    { color: var(--green); }
-    .risk-label.medium { color: var(--orange); }
-    .risk-label.high   { color: var(--red); }
-
-    /* ---------- Button ---------- */
-    .btn-generate {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      font-weight: 500;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+    .risk-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .risk-low    { background: rgba(76,175,125,0.15); color: var(--green);  border: 1px solid rgba(76,175,125,0.3); }
+    .risk-low .risk-dot    { background: var(--green); }
+    .risk-medium { background: rgba(232,131,75,0.15);  color: var(--orange); border: 1px solid rgba(232,131,75,0.3); }
+    .risk-medium .risk-dot { background: var(--orange); }
+    .risk-high   { background: rgba(224,82,82,0.15);  color: var(--red);    border: 1px solid rgba(224,82,82,0.3); }
+    .risk-high .risk-dot   { background: var(--red); }
+
+    /* Generate button */
+    .btn-generate {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
       background: var(--amber);
-      color: var(--navy);
+      color: var(--bg);
       border: none;
-      padding: 16px 36px;
+      padding: 15px 34px;
       border-radius: 5px;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
       transition: background 0.15s, transform 0.1s;
     }
+    .btn-generate:hover:not(:disabled) { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-generate:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    .btn-generate:hover { background: var(--amber-light); transform: translateY(-1px); }
-    .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    /* ---------- Loading ---------- */
-    .loading-bar {
+    /* --- Loading --- */
+    .loading {
       display: none;
-      background: var(--navy-mid);
-      border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
       text-align: center;
       margin-bottom: 24px;
     }
-
-    .loading-bar.show { display: block; }
-
+    .loading.show { display: block; }
     .spinner {
-      width: 32px;
-      height: 32px;
-      border: 3px solid var(--navy-border);
+      width: 34px; height: 34px;
+      border: 3px solid var(--border);
       border-top-color: var(--teal);
       border-radius: 50%;
-      animation: spin 0.75s linear infinite;
+      animation: spin 0.8s linear infinite;
       margin: 0 auto 14px;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-msg { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
 
-    .loading-text {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-    }
-
-    /* ---------- Error ---------- */
-    .error-box {
+    /* --- Error --- */
+    .error {
       display: none;
-      background: rgba(224, 82, 82, 0.1);
+      background: rgba(224,82,82,0.1);
       border: 1px solid var(--red);
       border-radius: 5px;
       padding: 14px 18px;
-      font-size: 0.9rem;
       color: var(--red);
+      font-size: 0.88rem;
       margin-bottom: 20px;
     }
+    .error.show { display: block; }
 
-    .error-box.show { display: block; }
+    /* --- Results --- */
+    .results { display: none; }
+    .results.show { display: block; }
 
-    /* ---------- Results ---------- */
-    .results-area { display: none; }
-    .results-area.show { display: block; }
-
-    .results-header {
+    .results-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
       gap: 12px;
     }
 
-    .results-title {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--white);
-    }
+    .results-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--white); }
 
-    .results-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    .btn-secondary {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
     }
+    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-export {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: var(--amber);
+      border: 1px solid rgba(232,162,75,0.35);
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-export:hover { background: rgba(232,162,75,0.08); border-color: var(--amber); }
 
-    .progress-bar-wrap {
-      background: var(--navy-mid);
-      border: 1px solid var(--navy-border);
+    /* Progress */
+    .progress-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 16px 20px;
+      padding: 14px 20px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
+    .progress-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--teal); border-radius: 3px; width: 0%; transition: width 0.3s ease; }
+    .progress-text { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
+    .progress-num { color: var(--teal); font-weight: 500; }
 
-    .progress-bar-bg {
-      flex: 1;
-      height: 6px;
-      background: var(--navy-light);
-      border-radius: 3px;
-      overflow: hidden;
-    }
+    /* Checklist sections */
+    .cl-section { background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
 
-    .progress-bar-fill {
-      height: 100%;
-      background: var(--teal);
-      border-radius: 3px;
-      transition: width 0.3s ease;
-      width: 0%;
-    }
-
-    .progress-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .progress-count {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--teal);
-      font-weight: 500;
-    }
-
-    /* ---------- Checklist Sections ---------- */
-    .checklist-section {
-      background: var(--navy-mid);
-      border: 1px solid var(--navy-border);
-      border-radius: 8px;
-      margin-bottom: 14px;
-      overflow: hidden;
-    }
-
-    .section-header {
+    .cl-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
+      gap: 12px;
+      padding: 15px 20px;
       cursor: pointer;
-      user-select: none;
+      border-bottom: 1px solid var(--border);
       transition: background 0.15s;
-      border-bottom: 1px solid var(--navy-border);
+      user-select: none;
     }
+    .cl-header:hover { background: var(--card-hover); }
 
-    .section-header:hover { background: var(--navy-light); }
-
-    .section-badge {
+    .cl-badge {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       padding: 3px 8px;
@@ -373,104 +272,55 @@
       white-space: nowrap;
     }
 
-    .badge-privacy     { background: rgba(78,205,196,0.12); color: var(--teal);   border: 1px solid rgba(78,205,196,0.3); }
-    .badge-bias        { background: rgba(224,82,82,0.12);  color: var(--red);    border: 1px solid rgba(224,82,82,0.3); }
-    .badge-oversight   { background: rgba(232,162,75,0.15); color: var(--amber);  border: 1px solid rgba(232,162,75,0.3); }
-    .badge-regulatory  { background: rgba(160,122,232,0.12);color: var(--purple); border: 1px solid rgba(160,122,232,0.3); }
-    .badge-audit       { background: rgba(76,175,125,0.12); color: var(--green);  border: 1px solid rgba(76,175,125,0.3); }
-    .badge-stakeholder { background: rgba(232,131,75,0.12); color: var(--orange); border: 1px solid rgba(232,131,75,0.3); }
-    .badge-risk        { background: rgba(224,82,82,0.08);  color: #F08080;       border: 1px solid rgba(224,82,82,0.2); }
+    .b1 { background: rgba(78,205,196,0.1);  color: var(--teal);   border: 1px solid rgba(78,205,196,0.25); }
+    .b2 { background: rgba(224,82,82,0.1);   color: var(--red);    border: 1px solid rgba(224,82,82,0.25); }
+    .b3 { background: rgba(232,162,75,0.1);  color: var(--amber);  border: 1px solid rgba(232,162,75,0.25); }
+    .b4 { background: rgba(160,122,232,0.1); color: #A07AE8;       border: 1px solid rgba(160,122,232,0.25); }
+    .b5 { background: rgba(76,175,125,0.1);  color: var(--green);  border: 1px solid rgba(76,175,125,0.25); }
+    .b6 { background: rgba(224,82,82,0.08);  color: #F08080;       border: 1px solid rgba(224,82,82,0.18); }
 
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      color: var(--white);
-      flex: 1;
-    }
+    .cl-title { font-family: var(--font-display); font-size: 0.92rem; color: var(--white); flex: 1; }
+    .cl-count { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+    .cl-arrow { color: var(--muted); font-size: 0.72rem; transition: transform 0.2s; }
+    .cl-arrow.open { transform: rotate(180deg); }
 
-    .section-progress {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-muted);
-    }
+    .cl-items { padding: 4px 0; }
+    .cl-items.hidden { display: none; }
 
-    .section-toggle {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      transition: transform 0.2s;
-    }
-
-    .section-toggle.open { transform: rotate(180deg); }
-
-    .section-items {
-      padding: 8px 0;
-    }
-
-    .section-items.collapsed { display: none; }
-
-    /* ---------- Checklist Items ---------- */
-    .checklist-item {
+    /* Individual items */
+    .cl-item {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(46,74,99,0.4);
-      transition: background 0.12s;
+      gap: 12px;
+      padding: 11px 20px;
+      border-bottom: 1px solid rgba(46,74,99,0.35);
       cursor: pointer;
+      transition: background 0.12s;
     }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-item:hover { background: rgba(33,54,80,0.6); }
+    .cl-item.done { background: rgba(76,175,125,0.04); }
 
-    .checklist-item:last-child { border-bottom: none; }
-    .checklist-item:hover { background: rgba(36,59,85,0.5); }
-
-    .checklist-item.checked {
-      background: rgba(76,175,125,0.06);
-    }
-
-    .custom-checkbox {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--navy-border);
+    .cb {
+      width: 17px; height: 17px;
+      border: 2px solid var(--border);
       border-radius: 3px;
       flex-shrink: 0;
       margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
-      background: var(--navy-light);
+      background: var(--bg);
     }
+    .cl-item.done .cb { background: var(--green); border-color: var(--green); }
+    .cb-tick { display: none; color: var(--bg); font-size: 10px; font-weight: 800; }
+    .cl-item.done .cb-tick { display: block; }
 
-    .checklist-item.checked .custom-checkbox {
-      background: var(--green);
-      border-color: var(--green);
-    }
+    .cl-text { font-size: 0.88rem; color: var(--text); line-height: 1.55; flex: 1; transition: color 0.15s; }
+    .cl-item.done .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(155,170,187,0.4); }
 
-    .checkmark {
-      display: none;
-      color: var(--navy);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .checklist-item.checked .checkmark { display: block; }
-
-    .item-text {
-      font-size: 0.9rem;
-      color: var(--text-main);
-      line-height: 1.55;
-      transition: color 0.15s;
-      flex: 1;
-    }
-
-    .checklist-item.checked .item-text {
-      color: var(--text-muted);
-      text-decoration: line-through;
-      text-decoration-color: rgba(155,170,187,0.4);
-    }
-
-    .item-priority {
+    .cl-priority {
       font-family: var(--font-mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       padding: 2px 7px;
@@ -478,97 +328,26 @@
       flex-shrink: 0;
       margin-top: 3px;
     }
+    .p-high   { background: rgba(224,82,82,0.12);  color: var(--red);    border: 1px solid rgba(224,82,82,0.28); }
+    .p-medium { background: rgba(232,131,75,0.12); color: var(--orange); border: 1px solid rgba(232,131,75,0.28); }
+    .p-low    { background: rgba(76,175,125,0.1);  color: var(--green);  border: 1px solid rgba(76,175,125,0.25); }
 
-    .priority-high   { background: rgba(224,82,82,0.15);  color: var(--red);    border: 1px solid rgba(224,82,82,0.3); }
-    .priority-medium { background: rgba(232,131,75,0.15); color: var(--orange); border: 1px solid rgba(232,131,75,0.3); }
-    .priority-low    { background: rgba(76,175,125,0.12); color: var(--green);  border: 1px solid rgba(76,175,125,0.3); }
-
-    /* ---------- Action Buttons ---------- */
-    .btn-small {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      background: var(--navy-light);
-      color: var(--text-muted);
-      border: 1px solid var(--navy-border);
-      padding: 8px 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-small:hover { border-color: var(--teal); color: var(--teal); }
-    .btn-small.active { border-color: var(--green); color: var(--green); }
-
-    .btn-export {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      background: var(--navy-light);
-      color: var(--amber);
-      border: 1px solid rgba(232,162,75,0.3);
-      padding: 8px 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-export:hover { border-color: var(--amber); background: rgba(232,162,75,0.08); }
-
-    /* ---------- Footer ---------- */
-    footer {
-      background: var(--navy-mid);
-      border-top: 1px solid var(--navy-border);
-      padding: 36px 0;
-      margin-top: 40px;
-    }
-
-    .footer-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--white);
-    }
-
+    /* --- Footer --- */
+    footer { background: var(--card); border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
+    .footer-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--white); }
     .footer-logo span { color: var(--amber); }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .footer-links a { color: var(--text-muted); }
+    .footer-links { list-style: none; display: flex; gap: 22px; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-links a { color: var(--muted); }
     .footer-links a:hover { color: var(--teal); text-decoration: none; }
+    .footer-copy { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
 
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 700px) {
-      .tool-hero h1 { font-size: 1.7rem; }
-      .input-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.65rem; }
+      .input-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 14px; text-align: center; }
       .nav-links { display: none; }
-      .results-header { flex-direction: column; align-items: flex-start; }
+      .results-top { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -585,22 +364,22 @@
     </nav>
   </header>
 
-  <section class="tool-hero">
+  <section class="hero">
     <div class="container">
       <span class="eyebrow">Tool — AI Governance</span>
       <h1>AI Governance Checklist</h1>
-      <p>Select your project type and risk level to generate a tailored AI governance checklist. Tick off items as you complete them and export your progress for stakeholder reporting.</p>
+      <p>Select your industry and risk level to generate a tailored AI governance checklist. Tick off items as you complete them and export your progress for stakeholder reporting.</p>
     </div>
   </section>
 
-  <section class="tool-body">
+  <section class="body">
     <div class="container">
 
-      <div class="input-panel">
-        <div class="input-grid">
+      <div class="input-card">
+        <div class="input-row">
           <div>
-            <label class="field-label" for="industry-select">Project type / Industry</label>
-            <select id="industry-select">
+            <label class="field-label" for="industry">Industry / Project Type</label>
+            <select id="industry">
               <option value="Healthcare">Healthcare</option>
               <option value="Finance">Finance</option>
               <option value="Retail">Retail</option>
@@ -609,53 +388,46 @@
             </select>
           </div>
           <div>
-            <label class="field-label" for="risk-select">Risk level</label>
-            <select id="risk-select">
+            <label class="field-label" for="risk">Risk Level</label>
+            <select id="risk">
               <option value="Low">Low</option>
               <option value="Medium" selected>Medium</option>
               <option value="High">High</option>
             </select>
-            <div class="risk-indicator" id="risk-indicator">
-              <div class="risk-dot" id="dot-1"></div>
-              <div class="risk-dot" id="dot-2"></div>
-              <div class="risk-dot" id="dot-3"></div>
-              <span class="risk-label medium" id="risk-label">Medium Risk</span>
+            <div id="risk-pill" class="risk-pill risk-medium">
+              <span class="risk-dot"></span>
+              <span id="risk-pill-text">Medium Risk</span>
             </div>
           </div>
         </div>
-
-        <button class="btn-generate" id="generate-btn">
-          <span>⚡</span>
-          Generate Checklist
+        <button class="btn-generate" id="gen-btn">
+          <span>⚡</span> Generate Checklist
         </button>
       </div>
 
-      <div class="error-box" id="error-box"></div>
+      <div class="error" id="error"></div>
 
-      <div class="loading-bar" id="loading-bar">
+      <div class="loading" id="loading">
         <div class="spinner"></div>
-        <p class="loading-text" id="loading-text">Generating checklist...</p>
+        <p class="loading-msg" id="loading-msg">Generating checklist...</p>
       </div>
 
-      <div class="results-area" id="results-area">
-        <div class="results-header">
+      <div class="results" id="results">
+        <div class="results-top">
           <span class="results-title">Governance Checklist</span>
-          <div class="results-actions">
-            <button class="btn-small" id="expand-all-btn">Expand all</button>
-            <button class="btn-small" id="reset-btn">Reset checks</button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-secondary" id="toggle-btn">Collapse all</button>
+            <button class="btn-secondary" id="reset-btn">Reset</button>
             <button class="btn-export" id="export-btn">Export report</button>
           </div>
         </div>
 
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-fill"></div>
-          </div>
-          <span class="progress-count" id="progress-count">0 / 0</span>
-          <span class="progress-label">items completed</span>
+        <div class="progress-wrap">
+          <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+          <span class="progress-text"><span class="progress-num" id="pnum">0</span> / <span id="ptotal">0</span> completed</span>
         </div>
 
-        <div id="checklist-container"></div>
+        <div id="cl-container"></div>
       </div>
 
     </div>
@@ -674,355 +446,287 @@
   </footer>
 
   <script>
-    // =============================================
-    // CONFIG
-    // =============================================
+    // ============================================
+    // API KEY — replace with your OpenAI key
+    // ============================================
     const OPENAI_API_KEY = "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";
 
-    // =============================================
-    // Section definitions
-    // =============================================
+    // ============================================
+    // Section config
+    // ============================================
     const SECTIONS = [
-      { key: "DATA_PRIVACY",      label: "Data Privacy Requirements",    badge: "badge-privacy",     shortLabel: "Privacy"     },
-      { key: "BIAS_FAIRNESS",     label: "Bias and Fairness Checks",     badge: "badge-bias",        shortLabel: "Bias"        },
-      { key: "HUMAN_OVERSIGHT",   label: "Human Oversight Requirements", badge: "badge-oversight",   shortLabel: "Oversight"   },
-      { key: "REGULATORY",        label: "Regulatory Compliance",        badge: "badge-regulatory",  shortLabel: "Regulatory"  },
-      { key: "AUDIT_MONITORING",  label: "Audit and Monitoring",         badge: "badge-audit",       shortLabel: "Audit"       },
-      { key: "STAKEHOLDER",       label: "Stakeholder Communication",    badge: "badge-stakeholder", shortLabel: "Stakeholder" },
-      { key: "RISK_MITIGATION",   label: "Risk Mitigation",              badge: "badge-risk",        shortLabel: "Risk"        },
+      { key: "DATA_PRIVACY",    label: "Data Privacy Requirements",    badge: "b1", short: "Privacy"    },
+      { key: "BIAS_CHECKS",     label: "Bias and Fairness Checks",     badge: "b2", short: "Bias"       },
+      { key: "HUMAN_OVERSIGHT", label: "Human Oversight Requirements", badge: "b3", short: "Oversight"  },
+      { key: "REGULATORY",      label: "Regulatory Compliance",        badge: "b4", short: "Regulatory" },
+      { key: "AUDIT",           label: "Audit and Monitoring",         badge: "b5", short: "Audit"      },
+      { key: "RISK_MITIGATION", label: "Risk Mitigation",              badge: "b6", short: "Risk"       },
     ];
 
-    const LOADING_MESSAGES = [
+    const MSGS = [
       "Generating checklist...",
       "Analysing regulatory requirements...",
       "Mapping bias and fairness checks...",
       "Building oversight requirements...",
-      "Finalising risk mitigation items...",
+      "Finalising risk items...",
     ];
 
-    // =============================================
-    // Risk indicator
-    // =============================================
-    const riskSelect = document.getElementById("risk-select");
-
-    function updateRiskIndicator(risk) {
-      const dot1  = document.getElementById("dot-1");
-      const dot2  = document.getElementById("dot-2");
-      const dot3  = document.getElementById("dot-3");
-      const label = document.getElementById("risk-label");
-
-      dot1.className = "risk-dot";
-      dot2.className = "risk-dot";
-      dot3.className = "risk-dot";
-      label.className = "risk-label";
-
-      if (risk === "Low") {
-        dot1.classList.add("active-low");
-        label.classList.add("low");
-        label.textContent = "Low Risk";
-      } else if (risk === "Medium") {
-        dot1.classList.add("active-medium");
-        dot2.classList.add("active-medium");
-        label.classList.add("medium");
-        label.textContent = "Medium Risk";
-      } else {
-        dot1.classList.add("active-high");
-        dot2.classList.add("active-high");
-        dot3.classList.add("active-high");
-        label.classList.add("high");
-        label.textContent = "High Risk";
-      }
+    // ============================================
+    // Risk pill update
+    // ============================================
+    const riskEl = document.getElementById("risk");
+    function updatePill(val) {
+      const pill = document.getElementById("risk-pill");
+      const txt  = document.getElementById("risk-pill-text");
+      pill.className = "risk-pill risk-" + val.toLowerCase();
+      txt.textContent = val + " Risk";
     }
+    riskEl.addEventListener("change", () => updatePill(riskEl.value));
+    updatePill("Medium");
 
-    riskSelect.addEventListener("change", () => updateRiskIndicator(riskSelect.value));
-    updateRiskIndicator("Medium");
+    // ============================================
+    // Progress
+    // ============================================
+    function refreshProgress() {
+      const all   = document.querySelectorAll(".cl-item");
+      const done  = document.querySelectorAll(".cl-item.done");
+      const total = all.length;
+      const n     = done.length;
+      const pct   = total ? Math.round((n / total) * 100) : 0;
 
-    // =============================================
-    // Progress tracking
-    // =============================================
-    function updateProgress() {
-      const all     = document.querySelectorAll(".checklist-item");
-      const checked = document.querySelectorAll(".checklist-item.checked");
-      const total   = all.length;
-      const done    = checked.length;
-      const pct     = total === 0 ? 0 : Math.round((done / total) * 100);
+      document.getElementById("pfill").style.width = pct + "%";
+      document.getElementById("pnum").textContent  = n;
+      document.getElementById("ptotal").textContent = total;
 
-      document.getElementById("progress-fill").style.width  = pct + "%";
-      document.getElementById("progress-count").textContent = `${done} / ${total}`;
-
-      // Update section progress labels
-      SECTIONS.forEach((section, i) => {
-        const sectionEl  = document.getElementById(`section-${i}`);
-        if (!sectionEl) return;
-        const items    = sectionEl.querySelectorAll(".checklist-item");
-        const complete = sectionEl.querySelectorAll(".checklist-item.checked");
-        const progEl   = sectionEl.querySelector(".section-progress");
-        if (progEl) progEl.textContent = `${complete.length}/${items.length}`;
+      // Per-section counts
+      SECTIONS.forEach((s, i) => {
+        const sec = document.getElementById("sec-" + i);
+        if (!sec) return;
+        const sAll  = sec.querySelectorAll(".cl-item").length;
+        const sDone = sec.querySelectorAll(".cl-item.done").length;
+        const cnt   = sec.querySelector(".cl-count");
+        if (cnt) cnt.textContent = sDone + "/" + sAll;
       });
     }
 
-    // =============================================
-    // Build checklist item
-    // =============================================
-    function buildItem(text, priority) {
+    // ============================================
+    // Build item
+    // ============================================
+    function makeItem(text, priority) {
       const div = document.createElement("div");
-      div.className = "checklist-item";
-
-      const priorityClass = priority === "High" ? "priority-high"
-                          : priority === "Medium" ? "priority-medium"
-                          : "priority-low";
-
+      div.className = "cl-item";
+      const pc = priority === "High" ? "p-high" : priority === "Low" ? "p-low" : "p-medium";
       div.innerHTML = `
-        <div class="custom-checkbox"><span class="checkmark">✓</span></div>
-        <span class="item-text">${text}</span>
-        <span class="item-priority ${priorityClass}">${priority}</span>
+        <div class="cb"><span class="cb-tick">✓</span></div>
+        <span class="cl-text">${text}</span>
+        <span class="cl-priority ${pc}">${priority}</span>
       `;
-
       div.addEventListener("click", () => {
-        div.classList.toggle("checked");
-        updateProgress();
+        div.classList.toggle("done");
+        refreshProgress();
       });
-
       return div;
     }
 
-    // =============================================
+    // ============================================
     // Build section
-    // =============================================
-    function buildSection(section, items, index) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "checklist-section";
-      wrapper.id = `section-${index}`;
+    // ============================================
+    function makeSection(section, items, idx) {
+      const wrap = document.createElement("div");
+      wrap.className = "cl-section";
+      wrap.id = "sec-" + idx;
 
-      const header = document.createElement("div");
-      header.className = "section-header";
-      header.innerHTML = `
-        <span class="section-badge ${section.badge}">${section.shortLabel}</span>
-        <span class="section-title">${section.label}</span>
-        <span class="section-progress">0/${items.length}</span>
-        <span class="section-toggle open" id="stoggle-${index}">▼</span>
+      const hdr = document.createElement("div");
+      hdr.className = "cl-header";
+      hdr.innerHTML = `
+        <span class="cl-badge ${section.badge}">${section.short}</span>
+        <span class="cl-title">${section.label}</span>
+        <span class="cl-count">0/${items.length}</span>
+        <span class="cl-arrow open" id="arr-${idx}">▼</span>
       `;
 
-      const itemsDiv = document.createElement("div");
-      itemsDiv.className = "section-items";
-      itemsDiv.id = `sitems-${index}`;
+      const body = document.createElement("div");
+      body.className = "cl-items";
+      body.id = "items-" + idx;
+      items.forEach(it => body.appendChild(makeItem(it.text, it.priority)));
 
-      items.forEach(({ text, priority }) => {
-        itemsDiv.appendChild(buildItem(text, priority || "Medium"));
+      hdr.addEventListener("click", () => {
+        body.classList.toggle("hidden");
+        document.getElementById("arr-" + idx).classList.toggle("open");
       });
 
-      header.addEventListener("click", () => {
-        itemsDiv.classList.toggle("collapsed");
-        const tog = document.getElementById(`stoggle-${index}`);
-        tog.classList.toggle("open");
-      });
-
-      wrapper.appendChild(header);
-      wrapper.appendChild(itemsDiv);
-      return wrapper;
+      wrap.appendChild(hdr);
+      wrap.appendChild(body);
+      return wrap;
     }
 
-    // =============================================
-    // Parse AI response
-    // =============================================
-    function parseSections(text) {
-      const result = {};
-      SECTIONS.forEach((section, i) => {
-        const nextKey = SECTIONS[i + 1] ? SECTIONS[i + 1].key : null;
-        const pattern = nextKey
-          ? new RegExp(`${section.key}:\\s*([\\s\\S]*?)(?=${nextKey}:|$)`, "i")
-          : new RegExp(`${section.key}:\\s*([\\s\\S]*?)$`, "i");
-        const match = text.match(pattern);
-        const raw = match ? match[1].trim() : "";
-
-        // Parse lines into items with priority
-        const lines = raw.split("\n").map(l => l.trim()).filter(l => l.length > 3);
-        result[section.key] = lines.map(line => {
-          let priority = "Medium";
-          let text = line.replace(/^[-•*]\s*/, "").trim();
-          if (/\[high\]/i.test(text))   { priority = "High";   text = text.replace(/\[high\]/i, "").trim(); }
-          if (/\[medium\]/i.test(text)) { priority = "Medium"; text = text.replace(/\[medium\]/i, "").trim(); }
-          if (/\[low\]/i.test(text))    { priority = "Low";    text = text.replace(/\[low\]/i, "").trim(); }
-          return { text, priority };
-        }).filter(item => item.text.length > 5);
+    // ============================================
+    // Parse response
+    // ============================================
+    function parse(text) {
+      const out = {};
+      SECTIONS.forEach((s, i) => {
+        const next = SECTIONS[i + 1];
+        const re = next
+          ? new RegExp(s.key + ":\\s*([\\s\\S]*?)(?=" + next.key + ":|$)", "i")
+          : new RegExp(s.key + ":\\s*([\\s\\S]*?)$", "i");
+        const m = text.match(re);
+        const raw = m ? m[1].trim() : "";
+        out[s.key] = raw.split("\n").map(l => l.trim()).filter(l => l.length > 4).map(line => {
+          let t = line.replace(/^[-•*\d.]+\s*/, "").trim();
+          let p = "Medium";
+          if (/\[high\]/i.test(t))   { p = "High";   t = t.replace(/\[high\]/i, "").trim(); }
+          if (/\[medium\]/i.test(t)) { p = "Medium"; t = t.replace(/\[medium\]/i, "").trim(); }
+          if (/\[low\]/i.test(t))    { p = "Low";    t = t.replace(/\[low\]/i, "").trim(); }
+          return { text: t, priority: p };
+        }).filter(it => it.text.length > 5);
       });
-      return result;
+      return out;
     }
 
-    // =============================================
-    // Main generate
-    // =============================================
-    document.getElementById("generate-btn").addEventListener("click", async () => {
-      const industry = document.getElementById("industry-select").value;
-      const risk     = document.getElementById("risk-select").value;
+    // ============================================
+    // Generate
+    // ============================================
+    document.getElementById("gen-btn").addEventListener("click", async () => {
+      const industry = document.getElementById("industry").value;
+      const risk     = document.getElementById("risk").value;
 
-      hideError();
-      hideResults();
-      showLoading(true);
+      document.getElementById("error").classList.remove("show");
+      document.getElementById("results").classList.remove("show");
+      document.getElementById("loading").classList.add("show");
+      document.getElementById("gen-btn").disabled = true;
 
-      const prompt = `You are a senior AI governance expert specialising in ${industry}. Generate a detailed AI governance checklist for a ${risk} risk ${industry} AI project.
-
-For each section below, provide 5-8 specific, actionable checklist items tailored to ${industry} and ${risk} risk level. Each item should have a priority tag: [High], [Medium], or [Low]. For ${risk} risk projects, weight items accordingly.
-
-Respond in EXACTLY this format. Use bullet points (- ) for each item. Include the priority tag at the end of each item.
-
-DATA_PRIVACY:
-- [checklist item] [High/Medium/Low]
-
-BIAS_FAIRNESS:
-- [checklist item] [High/Medium/Low]
-
-HUMAN_OVERSIGHT:
-- [checklist item] [High/Medium/Low]
-
-REGULATORY:
-- [checklist item] [High/Medium/Low]
-
-AUDIT_MONITORING:
-- [checklist item] [High/Medium/Low]
-
-STAKEHOLDER:
-- [checklist item] [High/Medium/Low]
-
-RISK_MITIGATION:
-- [checklist item] [High/Medium/Low]
-
-Be specific to ${industry} regulations and standards (e.g. HIPAA for Healthcare, GDPR, FCA for Finance, etc.). Make items concrete and testable, not generic.`;
-
-      let msgIndex = 0;
-      const msgInterval = setInterval(() => {
-        msgIndex = (msgIndex + 1) % LOADING_MESSAGES.length;
-        document.getElementById("loading-text").textContent = LOADING_MESSAGES[msgIndex];
+      let mi = 0;
+      const ticker = setInterval(() => {
+        mi = (mi + 1) % MSGS.length;
+        document.getElementById("loading-msg").textContent = MSGS[mi];
       }, 1800);
 
+      const prompt = `You are a senior AI governance expert. Generate a detailed AI governance checklist for a ${risk} risk ${industry} AI project.
+
+For each section, provide 5-7 specific, actionable checklist items tailored to ${industry} and ${risk} risk. Each item must end with a priority tag: [High], [Medium], or [Low].
+
+Respond in EXACTLY this format:
+
+DATA_PRIVACY:
+- item text [High/Medium/Low]
+
+BIAS_CHECKS:
+- item text [High/Medium/Low]
+
+HUMAN_OVERSIGHT:
+- item text [High/Medium/Low]
+
+REGULATORY:
+- item text [High/Medium/Low]
+
+AUDIT:
+- item text [High/Medium/Low]
+
+RISK_MITIGATION:
+- item text [High/Medium/Low]
+
+Be specific to ${industry} regulations (e.g. HIPAA, GDPR, FCA, CCPA). Items must be concrete and testable, not generic.`;
+
       try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        const res  = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${OPENAI_API_KEY}`
+            "Authorization": "Bearer " + OPENAI_API_KEY
           },
           body: JSON.stringify({
             model: "gpt-4o-mini",
-            max_tokens: 2000,
+            max_tokens: 1800,
             temperature: 0.3,
             messages: [{ role: "user", content: prompt }]
           })
         });
 
-        clearInterval(msgInterval);
-        const data = await response.json();
+        clearInterval(ticker);
+        const data = await res.json();
 
         if (data.error) {
-          showError("OpenAI error: " + data.error.message);
-          showLoading(false);
+          showErr("OpenAI error: " + data.error.message);
           return;
         }
 
-        const text    = data.choices[0].message.content;
-        const parsed  = parseSections(text);
-        const container = document.getElementById("checklist-container");
-        container.innerHTML = "";
+        const parsed = parse(data.choices[0].message.content);
+        const cont   = document.getElementById("cl-container");
+        cont.innerHTML = "";
 
-        SECTIONS.forEach((section, i) => {
-          const items = parsed[section.key] || [];
-          if (items.length > 0) {
-            container.appendChild(buildSection(section, items, i));
-          }
+        SECTIONS.forEach((s, i) => {
+          const items = parsed[s.key] || [];
+          if (items.length) cont.appendChild(makeSection(s, items, i));
         });
 
-        showLoading(false);
-        showResults();
-        updateProgress();
+        document.getElementById("loading").classList.remove("show");
+        document.getElementById("gen-btn").disabled = false;
+        document.getElementById("results").classList.add("show");
+        document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+        refreshProgress();
 
-      } catch (err) {
-        clearInterval(msgInterval);
-        showLoading(false);
-        showError("Network error: " + err.message);
+      } catch (e) {
+        clearInterval(ticker);
+        showErr("Network error: " + e.message);
       }
     });
 
-    // =============================================
-    // Expand all / Reset / Export
-    // =============================================
-    let allExpanded = true;
+    function showErr(msg) {
+      document.getElementById("loading").classList.remove("show");
+      document.getElementById("gen-btn").disabled = false;
+      const el = document.getElementById("error");
+      el.textContent = msg;
+      el.classList.add("show");
+    }
 
-    document.getElementById("expand-all-btn").addEventListener("click", () => {
-      allExpanded = !allExpanded;
-      document.querySelectorAll(".section-items").forEach(el => {
-        el.classList.toggle("collapsed", !allExpanded);
-      });
-      document.querySelectorAll(".section-toggle").forEach(el => {
-        el.classList.toggle("open", allExpanded);
-      });
-      document.getElementById("expand-all-btn").textContent = allExpanded ? "Collapse all" : "Expand all";
+    // ============================================
+    // Toggle / Reset / Export
+    // ============================================
+    let collapsed = false;
+    document.getElementById("toggle-btn").addEventListener("click", () => {
+      collapsed = !collapsed;
+      document.querySelectorAll(".cl-items").forEach(el => el.classList.toggle("hidden", collapsed));
+      document.querySelectorAll(".cl-arrow").forEach(el => el.classList.toggle("open", !collapsed));
+      document.getElementById("toggle-btn").textContent = collapsed ? "Expand all" : "Collapse all";
     });
 
     document.getElementById("reset-btn").addEventListener("click", () => {
-      document.querySelectorAll(".checklist-item").forEach(el => el.classList.remove("checked"));
-      updateProgress();
+      document.querySelectorAll(".cl-item").forEach(el => el.classList.remove("done"));
+      refreshProgress();
     });
 
     document.getElementById("export-btn").addEventListener("click", () => {
-      const industry = document.getElementById("industry-select").value;
-      const risk     = document.getElementById("risk-select").value;
+      const industry = document.getElementById("industry").value;
+      const risk     = document.getElementById("risk").value;
+      const done     = document.querySelectorAll(".cl-item.done").length;
+      const total    = document.querySelectorAll(".cl-item").length;
+      const pct      = total ? Math.round((done / total) * 100) : 0;
       const date     = new Date().toLocaleDateString("en-GB");
-      const all      = document.querySelectorAll(".checklist-item");
-      const done     = document.querySelectorAll(".checklist-item.checked");
 
-      let report = `AI GOVERNANCE CHECKLIST REPORT\n`;
-      report    += `${"=".repeat(50)}\n`;
-      report    += `Industry: ${industry} | Risk Level: ${risk}\n`;
-      report    += `Generated: ${date}\n`;
-      report    += `Completion: ${done.length}/${all.length} items (${Math.round((done.length/all.length)*100)}%)\n\n`;
+      let out = `AI GOVERNANCE CHECKLIST REPORT\n${"=".repeat(48)}\n`;
+      out += `Industry: ${industry} | Risk: ${risk} | Date: ${date}\n`;
+      out += `Completion: ${done}/${total} items (${pct}%)\n`;
 
-      SECTIONS.forEach((section, i) => {
-        const sectionEl = document.getElementById(`section-${i}`);
-        if (!sectionEl) return;
-        report += `\n${section.label.toUpperCase()}\n${"-".repeat(40)}\n`;
-        sectionEl.querySelectorAll(".checklist-item").forEach(item => {
-          const checked  = item.classList.contains("checked");
-          const text     = item.querySelector(".item-text").textContent;
-          const priority = item.querySelector(".item-priority").textContent;
-          report += `${checked ? "[✓]" : "[ ]"} [${priority}] ${text}\n`;
+      SECTIONS.forEach((s, i) => {
+        const sec = document.getElementById("sec-" + i);
+        if (!sec) return;
+        out += `\n${s.label.toUpperCase()}\n${"-".repeat(36)}\n`;
+        sec.querySelectorAll(".cl-item").forEach(item => {
+          const checked  = item.classList.contains("done") ? "[✓]" : "[ ]";
+          const text     = item.querySelector(".cl-text").textContent;
+          const priority = item.querySelector(".cl-priority").textContent;
+          out += `${checked} [${priority}] ${text}\n`;
         });
       });
 
-      navigator.clipboard.writeText(report).then(() => {
+      navigator.clipboard.writeText(out).then(() => {
         const btn = document.getElementById("export-btn");
+        const orig = btn.textContent;
         btn.textContent = "Copied!";
-        setTimeout(() => { btn.textContent = "Export report"; }, 2000);
+        setTimeout(() => { btn.textContent = orig; }, 2000);
       });
     });
-
-    // =============================================
-    // Helpers
-    // =============================================
-    function showError(msg) {
-      const box = document.getElementById("error-box");
-      box.textContent = msg;
-      box.classList.add("show");
-    }
-
-    function hideError() {
-      document.getElementById("error-box").classList.remove("show");
-    }
-
-    function showLoading(show) {
-      const bar = document.getElementById("loading-bar");
-      const btn = document.getElementById("generate-btn");
-      if (show) { bar.classList.add("show"); btn.disabled = true; }
-      else       { bar.classList.remove("show"); btn.disabled = false; }
-    }
-
-    function showResults() {
-      document.getElementById("results-area").classList.add("show");
-      document.getElementById("results-area").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function hideResults() {
-      document.getElementById("results-area").classList.remove("show");
-    }
   </script>
 
 </body>
