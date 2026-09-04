@@ -8,29 +8,25 @@ exports.handler = async function(event) {
     const processDesc = body.process;
     const context = body.context;
     const industry = body.industry;
+    const apiKey = process.env.OPENAI_API_KEY;
 
-    const prompt = `You are a senior business analyst. Analyse the following process and produce a structured report with three sections.
+    const prompt = `You are a senior business analyst. Analyse the following process and produce a structured report.
 
 CURRENT PROCESS:
 ${processDesc}
 ${context ? `\nCONTEXT / PAIN POINTS / GOALS:\n${context}` : ''}
 ${industry ? `\nINDUSTRY: ${industry}` : ''}
 
-Produce your response in exactly this format:
+Respond using EXACTLY these three headers and no other text:
 
 AS-IS ANALYSIS:
-[analysis here]
+(write 4-6 bullet points analysing the current state, inefficiencies, bottlenecks, and root causes)
 
 TO-BE RECOMMENDATIONS:
-[recommendations here]
+(write 4-6 bullet points describing the improved future state with specific actions and technology suggestions)
 
 GAP ANALYSIS:
-[gap analysis here]`;
-
-    const apiKey = process.env.OPENAI_API_KEY;
-    
-    console.log("API Key exists:", !!apiKey);
-    console.log("API Key prefix:", apiKey ? apiKey.substring(0, 7) : "none");
+(write 4-6 bullet points identifying gaps between current and future state including process, technology, and skills gaps)`;
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -46,14 +42,12 @@ GAP ANALYSIS:
     });
 
     const data = await response.json();
-    console.log("OpenAI response status:", response.status);
-    console.log("OpenAI data:", JSON.stringify(data).substring(0, 300));
 
     if (data.error) {
       return {
         statusCode: 200,
         headers: { "Access-Control-Allow-Origin": "*" },
-        body: JSON.stringify({ result: "OpenAI error: " + data.error.message })
+        body: JSON.stringify({ result: "API Error: " + data.error.message })
       };
     }
 
@@ -66,7 +60,6 @@ GAP ANALYSIS:
     };
 
   } catch (err) {
-    console.log("Catch error:", err.message);
     return {
       statusCode: 500,
       headers: { "Access-Control-Allow-Origin": "*" },
