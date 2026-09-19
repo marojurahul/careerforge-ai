@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BA Interview Question Generator | CareerForge AI</title>
+  <meta name="description" content="Generate tailored Business Analyst interview questions with answer frameworks. Practice behavioral, technical, case study, and AI knowledge questions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #0D1B2A;
+      color: #E8E0D0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid #1E3A5A;
+      background: #0D1B2A;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #E8E0D0;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: #E8A24B; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { color: #A0B0C0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: none; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-links a:hover { color: #E8E0D0; }
+
+    /* HERO */
+    .tool-hero {
+      padding: 64px 40px 48px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #4ECDC4;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .tool-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .tool-hero p {
+      font-size: 1.05rem;
+      color: #A0B0C0;
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    /* BODY */
+    .tool-body {
+      padding: 0 40px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* INPUT CARD */
+    .input-card {
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .field-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #A0B0C0;
+      display: block;
+      margin-bottom: 10px;
+      margin-top: 24px;
+    }
+    .field-label:first-of-type { margin-top: 0; }
+
+    /* PILLS */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 7px 16px;
+      border-radius: 30px;
+      border: 1.5px solid #1E3A5A;
+      background: transparent;
+      color: #A0B0C0;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pill:hover { border-color: #4ECDC4; color: #4ECDC4; }
+    .pill.active { background: #4ECDC4; border-color: #4ECDC4; color: #0D1B2A; font-weight: 600; }
+    .pill.diff-easy.active  { background: #4ECDC4; border-color: #4ECDC4; color: #0D1B2A; }
+    .pill.diff-medium.active{ background: #E8A24B; border-color: #E8A24B; color: #0D1B2A; }
+    .pill.diff-hard.active  { background: #C2553B; border-color: #C2553B; color: #fff; }
+
+    /* ROLE INPUT */
+    .role-input {
+      width: 100%;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      border: 1.5px solid #1E3A5A;
+      border-radius: 5px;
+      background: #0D1B2A;
+      color: #E8E0D0;
+      margin-top: 0;
+    }
+    .role-input::placeholder { color: #5A7080; }
+    .role-input:focus { outline: 2px solid #4ECDC4; border-color: #4ECDC4; }
+
+    /* GENERATE BTN */
+    .generate-btn {
+      margin-top: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: #E8A24B;
+      color: #0D1B2A;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.15s;
+    }
+    .generate-btn:hover { background: #D4923B; }
+    .generate-btn:disabled { background: #3A5068; color: #5A7080; cursor: not-allowed; }
+
+    /* LOADING */
+    .loading-state {
+      display: none;
+      text-align: center;
+      padding: 52px 24px;
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .loading-state.show { display: block; }
+    .spinner {
+      width: 38px; height: 38px;
+      border: 3px solid #1E3A5A;
+      border-top-color: #4ECDC4;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5A7080;
+    }
+
+    /* ERROR */
+    .error-box {
+      display: none;
+      background: #2A1A1A;
+      border: 1px solid #C2553B;
+      border-radius: 5px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #E87060;
+      margin-bottom: 20px;
+    }
+    .error-box.show { display: block; }
+
+    /* RESULTS */
+    .result-area { display: none; }
+    .result-area.show { display: block; }
+
+    .result-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .result-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5A7080;
+    }
+    .toolbar-btns { display: flex; gap: 10px; }
+
+    .tool-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1.5px solid #1E3A5A;
+      background: transparent;
+      color: #A0B0C0;
+      transition: all 0.15s;
+    }
+    .tool-btn:hover { border-color: #4ECDC4; color: #4ECDC4; }
+    .tool-btn.practice-on { background: #4ECDC4; border-color: #4ECDC4; color: #0D1B2A; font-weight: 700; }
+    .tool-btn.copied { background: #4ECDC4; border-color: #4ECDC4; color: #0D1B2A; }
+
+    /* QUESTION CARDS */
+    .question-card {
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #E8A24B;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: #2A1A0A;
+      border: 1px solid #3A2A0A;
+      border-radius: 3px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .q-type-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+    .badge-behavioral { background: #1A2A4A; color: #4ECDC4; border: 1px solid #2A4A6A; }
+    .badge-technical  { background: #2A1A3A; color: #B088E8; border: 1px solid #3A2A5A; }
+    .badge-casestudy  { background: #1A2A1A; color: #6ECDB0; border: 1px solid #2A4A2A; }
+    .badge-aiknowledge{ background: #2A2A1A; color: #E8C44B; border: 1px solid #4A4A1A; }
+
+    .q-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .framework-section { margin-top: 18px; }
+    .framework-toggle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #4ECDC4;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .framework-toggle:hover { color: #6EDDE4; }
+    .framework-toggle .arrow { transition: transform 0.15s; display: inline-block; }
+    .framework-toggle.open .arrow { transform: rotate(90deg); }
+
+    .framework-body {
+      background: #0D1B2A;
+      border: 1px solid #1E3A5A;
+      border-radius: 5px;
+      padding: 18px 20px;
+      font-size: 0.92rem;
+      color: #C0D0E0;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      display: none;
+    }
+    .framework-body.show { display: block; }
+
+    /* Practice mode — blur frameworks */
+    .practice-mode .framework-body {
+      filter: blur(6px);
+      user-select: none;
+      pointer-events: none;
+    }
+    .practice-mode .framework-toggle { opacity: 0.4; pointer-events: none; }
+    .practice-mode .practice-hint { display: block !important; }
+
+    .practice-hint {
+      display: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #5A7080;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #08121C;
+      border-top: 1px solid #1E3A5A;
+      padding: 48px 40px 32px;
+      margin-top: 40px;
+    }
+    .footer-grid {
+      max-width: 860px;
+      margin: 0 auto 32px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+    footer h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #E8E0D0;
+      margin-bottom: 12px;
+    }
+    footer p { font-size: 0.88rem; color: #5A7080; line-height: 1.6; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul a { color: #5A7080; text-decoration: none; font-size: 0.88rem; }
+    footer ul a:hover { color: #A0B0C0; }
+    .footer-bottom {
+      max-width: 860px;
+      margin: 0 auto;
+      border-top: 1px solid #1E3A5A;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: #3A5068;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .tool-hero, .tool-body { padding-left: 20px; padding-right: 20px; }
+      .tool-hero h1 { font-size: 1.7rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .result-toolbar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">CareerForge<span>AI</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#blog">Guides</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <section class="tool-hero">
+    <span class="eyebrow">Tool — Interview Prep</span>
+    <h1>BA Interview Question Generator</h1>
+    <p>Generate tailored Business Analyst interview questions with detailed answer frameworks. Choose your question type and difficulty, then use Practice Mode to test yourself.</p>
+  </section>
+
+  <section class="tool-body">
+
+    <div class="input-card">
+      <span class="field-label">Question Type (pick one or more)</span>
+      <div class="pill-row" id="type-pills">
+        <button class="pill active" data-value="Behavioral">Behavioral</button>
+        <button class="pill active" data-value="Technical">Technical</button>
+        <button class="pill active" data-value="Case Study">Case Study</button>
+        <button class="pill active" data-value="AI Knowledge">AI Knowledge</button>
+      </div>
+
+      <span class="field-label">Difficulty</span>
+      <div class="pill-row" id="diff-pills">
+        <button class="pill diff-easy" data-value="Easy">Easy</button>
+        <button class="pill diff-medium active" data-value="Medium">Medium</button>
+        <button class="pill diff-hard" data-value="Hard">Hard</button>
+      </div>
+
+      <span class="field-label">Target role / specialisation (optional)</span>
+      <input type="text" class="role-input" id="role-input" placeholder="e.g. Senior BA at a fintech company, AI Product Manager, Data Analyst...">
+
+      <br>
+      <button class="generate-btn" id="generate-btn">Generate 5 Questions →</button>
+    </div>
+
+    <div class="error-box" id="error-box"></div>
+
+    <div class="loading-state" id="loading-state">
+      <div class="spinner"></div>
+      <p class="loading-label" id="loading-label">Generating questions...</p>
+    </div>
+
+    <div class="result-area" id="result-area">
+      <div class="result-toolbar">
+        <span class="result-meta" id="result-meta"></span>
+        <div class="toolbar-btns">
+          <button class="tool-btn" id="practice-btn">Practice Mode</button>
+          <button class="tool-btn" id="copy-btn">Copy All</button>
+        </div>
+      </div>
+      <div id="questions-list"></div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h4>CareerForge AI</h4>
+        <p>Free tools and guides for analysts and operations professionals moving into AI-driven roles.</p>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="ai-business-analyst-transition.html">AI Analyst Transition</a></li>
+          <li><a href="ai-tools-for-analysts.html">AI Tools for Analysts</a></li>
+          <li><a href="ats-resume-guide.html">ATS Resume Guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="process-mapper.html">Process Mapper</a></li>
+          <li><a href="interview-generator.html">Interview Generator</a></li>
+          <li><a href="requirements-generator.html">Requirements Generator</a></li>
+          <li><a href="governance-checklist.html">Governance Checklist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CareerForge AI</span>
+      <span>Built with intent, not templates</span>
+    </div>
+  </footer>
+
+  <script>
+    const OPENAI_API_KEY = "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";
+
+    // --- PILL SELECTION ---
+    function setupPills(containerId, multiSelect) {
+      const container = document.getElementById(containerId);
+      container.querySelectorAll('.pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          if (multiSelect) {
+            pill.classList.toggle('active');
+          } else {
+            container.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+          }
+        });
+      });
+    }
+    setupPills('type-pills', true);
+    setupPills('diff-pills', false);
+
+    function getSelected(containerId) {
+      return [...document.getElementById(containerId).querySelectorAll('.pill.active')]
+        .map(p => p.dataset.value);
+    }
+
+    // --- LOADING ---
+    const loadingMessages = [
+      'Generating questions...',
+      'Crafting answer frameworks...',
+      'Tailoring for BA roles...',
+      'Almost ready...'
+    ];
+    let loadingInterval;
+    function startLoading() {
+      let i = 0;
+      document.getElementById('loading-label').textContent = loadingMessages[0];
+      loadingInterval = setInterval(() => {
+        i = (i + 1) % loadingMessages.length;
+        document.getElementById('loading-label').textContent = loadingMessages[i];
+      }, 2000);
+    }
+    function stopLoading() { clearInterval(loadingInterval); }
+
+    // --- BADGE CLASS ---
+    function badgeClass(type) {
+      const map = {
+        'behavioral': 'badge-behavioral',
+        'technical': 'badge-technical',
+        'case study': 'badge-casestudy',
+        'ai knowledge': 'badge-aiknowledge'
+      };
+      return map[(type || '').toLowerCase()] || 'badge-behavioral';
+    }
+
+    // --- RENDER QUESTIONS ---
+    let questionsData = [];
+    let practiceOn = false;
+
+    function renderQuestions() {
+      const list = document.getElementById('questions-list');
+      list.innerHTML = '';
+      questionsData.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+
+        const frameworkId = 'fw-' + idx;
+        const toggleId = 'toggle-' + idx;
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num">Q${idx + 1}</span>
+            <span class="q-type-badge ${badgeClass(q.type)}">${q.type || 'Behavioral'}</span>
+            <span class="q-text">${escapeHtml(q.question)}</span>
+          </div>
+          <div class="framework-section">
+            <button class="framework-toggle" id="${toggleId}" onclick="toggleFramework('${frameworkId}', '${toggleId}')">
+              <span class="arrow">▶</span> Answer Framework
+            </button>
+            <div class="framework-body" id="${frameworkId}">${escapeHtml(q.framework)}</div>
+            <p class="practice-hint">Turn off Practice Mode to see the answer framework.</p>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+      // Apply practice mode state
+      if (practiceOn) {
+        document.getElementById('questions-list').classList.add('practice-mode');
+      } else {
+        document.getElementById('questions-list').classList.remove('practice-mode');
+      }
+    }
+
+    function toggleFramework(fwId, toggleId) {
+      const fw = document.getElementById(fwId);
+      const btn = document.getElementById(toggleId);
+      fw.classList.toggle('show');
+      btn.classList.toggle('open');
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // --- PARSE AI RESPONSE ---
+    function parseQuestions(text) {
+      // Try to split by Q1, Q2 etc or numbered list
+      const questions = [];
+      // Split on patterns like "Q1." "1." "Question 1"
+      const parts = text.split(/(?=Q\d+[\.\:]|^\d+[\.\)]|\bQuestion\s+\d+)/im).filter(s => s.trim().length > 20);
+
+      parts.forEach((part, idx) => {
+        // Extract question line (first bold or first line before framework)
+        const lines = part.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+        let question = '';
+        let framework = '';
+        let type = '';
+        let frameworkStarted = false;
+
+        lines.forEach(line => {
+          const cleanLine = line.replace(/^\*+|\*+$/g, '').replace(/^Q?\d+[\.\:\)]\s*/i, '').trim();
+          if (!cleanLine) return;
+
+          // Detect type
+          const typeMatch = cleanLine.match(/\[(Behavioral|Technical|Case Study|AI Knowledge)\]/i);
+          if (typeMatch) { type = typeMatch[1]; return; }
+
+          // Detect framework start
+          if (/answer framework|framework:|how to answer|suggested answer|model answer/i.test(cleanLine)) {
+            frameworkStarted = true;
+            return;
+          }
+
+          if (!frameworkStarted && !question && cleanLine.length > 15) {
+            question = cleanLine;
+          } else if (frameworkStarted) {
+            framework += cleanLine + '\n';
+          } else if (question) {
+            framework += cleanLine + '\n';
+          }
+        });
+
+        if (question) {
+          questions.push({ question: question.trim(), framework: framework.trim(), type: type || '' });
+        }
+      });
+
+      return questions.slice(0, 5);
+    }
+
+    // --- GENERATE ---
+    document.getElementById('generate-btn').addEventListener('click', async () => {
+      const types = getSelected('type-pills');
+      const difficulty = getSelected('diff-pills')[0] || 'Medium';
+      const role = document.getElementById('role-input').value.trim();
+
+      if (types.length === 0) {
+        showError('Please select at least one question type.');
+        return;
+      }
+
+      hideError();
+      document.getElementById('result-area').classList.remove('show');
+      document.getElementById('loading-state').classList.add('show');
+      document.getElementById('generate-btn').disabled = true;
+      startLoading();
+
+      const roleNote = role ? ` The candidate is targeting: ${role}.` : '';
+      const prompt = `You are an expert interviewer for Business Analyst roles.
+
+Generate exactly 5 interview questions for a Business Analyst interview.
+
+Settings:
+- Question types to include: ${types.join(', ')}
+- Difficulty level: ${difficulty}${roleNote}
+
+For each question, use this EXACT format:
+
+Q1. [Type: ${types[0]}]
+<the interview question here>
+
+Answer Framework:
+<3-5 bullet points with specific, actionable advice on how to answer this question. Include what to cover, what structure to use (e.g. STAR method for behavioral), keywords to mention, and common mistakes to avoid.>
+
+Q2. [Type: ...]
+...and so on for all 5 questions.
+
+Important:
+- Rotate across the selected types: ${types.join(', ')}
+- Make questions appropriate for ${difficulty} difficulty
+- For Behavioral: use STAR-method scenarios
+- For Technical: focus on BA tools, SQL, requirements, process modeling
+- For Case Study: give a realistic BA scenario to analyze
+- For AI Knowledge: ask about AI/ML concepts relevant to a BA (explainability, bias, use cases, governance)
+- Answer frameworks must be practical and specific, not generic`;
+
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + OPENAI_API_KEY
+          },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            max_tokens: 2000,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error.message || 'API error');
+        }
+
+        const text = data.choices[0].message.content;
+        questionsData = parseQuestions(text);
+
+        if (questionsData.length === 0) {
+          throw new Error('Could not parse questions. Please try again.');
+        }
+
+        // Assign types if missing
+        let typeIdx = 0;
+        questionsData.forEach(q => {
+          if (!q.type) { q.type = types[typeIdx % types.length]; typeIdx++; }
+        });
+
+        stopLoading();
+        document.getElementById('loading-state').classList.remove('show');
+        document.getElementById('generate-btn').disabled = false;
+
+        document.getElementById('result-meta').textContent =
+          `${questionsData.length} questions · ${difficulty} · ${types.join(', ')}`;
+
+        renderQuestions();
+        document.getElementById('result-area').classList.add('show');
+
+      } catch (err) {
+        stopLoading();
+        document.getElementById('loading-state').classList.remove('show');
+        document.getElementById('generate-btn').disabled = false;
+        showError('Error: ' + err.message);
+      }
+    });
+
+    // --- PRACTICE MODE ---
+    document.getElementById('practice-btn').addEventListener('click', () => {
+      practiceOn = !practiceOn;
+      const btn = document.getElementById('practice-btn');
+      const list = document.getElementById('questions-list');
+      if (practiceOn) {
+        btn.textContent = 'Exit Practice';
+        btn.classList.add('practice-on');
+        list.classList.add('practice-mode');
+        // Close all open frameworks
+        document.querySelectorAll('.framework-body').forEach(fw => fw.classList.remove('show'));
+        document.querySelectorAll('.framework-toggle').forEach(t => t.classList.remove('open'));
+      } else {
+        btn.textContent = 'Practice Mode';
+        btn.classList.remove('practice-on');
+        list.classList.remove('practice-mode');
+      }
+    });
+
+    // --- COPY ALL ---
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      if (questionsData.length === 0) return;
+      let text = 'BA INTERVIEW QUESTIONS — CareerForge AI\n';
+      text += '='.repeat(40) + '\n\n';
+      questionsData.forEach((q, i) => {
+        text += `Q${i+1}. [${q.type}]\n${q.question}\n\nAnswer Framework:\n${q.framework}\n\n${'─'.repeat(40)}\n\n`;
+      });
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy All'; btn.classList.remove('copied'); }, 1800);
+      });
+    });
+
+    function showError(msg) {
+      const box = document.getElementById('error-box');
+      box.textContent = msg;
+      box.classList.add('show');
+    }
+    function hideError() {
+      document.getElementById('error-box').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
