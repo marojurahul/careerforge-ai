@@ -47,23 +47,22 @@ API calls are handled server-side via Netlify Functions to keep API keys secure 
 
 ## Project Structure
 
+```
 careerforge-ai/
-├── index.html # Homepage
-├── process-mapper.html # AS-IS TO-BE Process Mapper
-├── requirements-generator.html # AI Requirements Generator
-├── governance-checklist.html # AI Governance Checklist
-├── interview-generator.html # Interview Question Generator
-├── prompt-library.html # BA Prompt Library
-├── salary-calculator.html # Salary Calculator
+├── index.html
+├── process-mapper.html
+├── requirements-generator.html
+├── governance-checklist.html
+├── interview-generator.html
+├── prompt-library.html
+├── salary-calculator.html
 ├── netlify/
-│ └── functions/
-│ ├── analyze.js # Process mapper function
-│ ├── governance.js # Governance checklist function
-│ └── interview.js # Interview generator function
+│   └── functions/
+│       ├── analyze.js
+│       ├── governance.js
+│       └── interview.js
 └── README.md
-
-
----
+```
 
 ## Running Locally
 
