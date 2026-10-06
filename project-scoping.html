@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Project Scoping Tool | CareerForge AI</title>
+  <meta name="description" content="Free AI-powered project scoping tool for Business Analysts. Validate your AI project idea, assess ROI, identify risks, and build a scaling roadmap instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #0D1B2A;
+      color: #E8E0D0;
+      font-family: 'Source Serif 4', Georgia, serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid #1E3A5A;
+      background: #0D1B2A;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #E8E0D0;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: #E8A24B; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: #A0B0C0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #E8E0D0; }
+
+    /* HERO */
+    .tool-hero {
+      padding: 64px 40px 48px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #E8A24B;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .tool-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .tool-hero p {
+      font-size: 1.05rem;
+      color: #A0B0C0;
+      max-width: 640px;
+      line-height: 1.75;
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      max-width: 860px;
+      margin: 0 auto 8px;
+      padding: 0 40px;
+    }
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .step { font-size: 0.88rem; color: #A0B0C0; }
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #E8A24B;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* TOOL BODY */
+    .tool-body {
+      padding: 0 40px 80px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* INPUT CARD */
+    .input-card {
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .field-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #A0B0C0;
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 24px;
+    }
+    .field-label:first-of-type { margin-top: 0; }
+
+    .field-hint {
+      font-size: 0.82rem;
+      color: #5A7080;
+      margin-bottom: 10px;
+      margin-top: -4px;
+      display: block;
+    }
+
+    textarea {
+      width: 100%;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      border: 1.5px solid #1E3A5A;
+      border-radius: 5px;
+      background: #0D1B2A;
+      color: #E8E0D0;
+      resize: vertical;
+      transition: border-color 0.15s, outline 0.15s;
+    }
+    textarea::placeholder { color: #3A5068; }
+    textarea:focus {
+      outline: 2px solid #E8A24B;
+      outline-offset: 0;
+      border-color: #E8A24B;
+    }
+
+    .example-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: transparent;
+      color: #4ECDC4;
+      border: 1.5px solid #4ECDC4;
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.15s;
+    }
+    .example-btn:hover { background: rgba(78,205,196,0.1); }
+
+    .scope-btn {
+      margin-top: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      background: #E8A24B;
+      color: #0D1B2A;
+      border: none;
+      padding: 15px 36px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .scope-btn:hover { background: #D4923B; }
+    .scope-btn:active { transform: scale(0.98); }
+    .scope-btn:disabled { background: #3A5068; color: #5A7080; cursor: not-allowed; transform: none; }
+
+    /* ERROR */
+    .error-box {
+      display: none;
+      background: #2A1414;
+      border: 1px solid #C2553B;
+      border-radius: 5px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #E87060;
+      margin-bottom: 20px;
+    }
+    .error-box.show { display: block; }
+
+    /* LOADING */
+    .loading-state {
+      display: none;
+      text-align: center;
+      padding: 56px 24px;
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .loading-state.show { display: block; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid #1E3A5A;
+      border-top-color: #E8A24B;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+      margin: 0 auto 18px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5A7080;
+    }
+
+    /* RESULTS */
+    .result-area { display: none; }
+    .result-area.show { display: block; }
+
+    .result-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .result-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5A7080;
+    }
+    .copy-all-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1.5px solid #1E3A5A;
+      background: transparent;
+      color: #A0B0C0;
+      transition: all 0.15s;
+    }
+    .copy-all-btn:hover { border-color: #4ECDC4; color: #4ECDC4; }
+    .copy-all-btn.copied { background: #4ECDC4; border-color: #4ECDC4; color: #0D1B2A; font-weight: 700; }
+
+    /* RESULT SECTIONS */
+    .result-section {
+      background: #1A2D42;
+      border: 1px solid #1E3A5A;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #1E3A5A;
+    }
+
+    .section-icon {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .icon-validation { background: #1A2A1A; }
+    .icon-value      { background: #2A2A0A; }
+    .icon-risks      { background: #2A1414; }
+    .icon-roadmap    { background: #1A1A2A; }
+    .icon-metrics    { background: #0A2A2A; }
+
+    .section-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .badge-validation { background: #1A3A1A; color: #6ECB6E; border: 1px solid #2A5A2A; }
+    .badge-value      { background: #3A3A0A; color: #E8C44B; border: 1px solid #5A5A0A; }
+    .badge-risks      { background: #3A1A1A; color: #E87060; border: 1px solid #5A2A2A; }
+    .badge-roadmap    { background: #1A1A3A; color: #8080E8; border: 1px solid #2A2A5A; }
+    .badge-metrics    { background: #0A2A2A; color: #4ECDC4; border: 1px solid #0A4A4A; }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .section-content {
+      font-size: 0.93rem;
+      color: #C0D0E0;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #08121C;
+      border-top: 1px solid #1E3A5A;
+      padding: 48px 40px 32px;
+      margin-top: 24px;
+    }
+    .footer-grid {
+      max-width: 860px;
+      margin: 0 auto 32px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+    footer h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #E8E0D0;
+      margin-bottom: 12px;
+    }
+    footer p { font-size: 0.88rem; color: #5A7080; line-height: 1.6; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 8px; }
+    footer ul a { color: #5A7080; text-decoration: none; font-size: 0.88rem; transition: color 0.15s; }
+    footer ul a:hover { color: #A0B0C0; }
+    .footer-bottom {
+      max-width: 860px;
+      margin: 0 auto;
+      border-top: 1px solid #1E3A5A;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #3A5068;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .tool-hero, .tool-body, .how-it-works { padding-left: 20px; padding-right: 20px; }
+      .tool-hero { padding-top: 40px; padding-bottom: 32px; }
+      .tool-hero h1 { font-size: 1.7rem; }
+      .steps-row { grid-template-columns: 1fr; padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      footer { padding: 40px 20px 28px; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="logo">CareerForge<span>AI</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#blog">Guides</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <section class="tool-hero">
+    <span class="eyebrow">Tool — AI Strategy</span>
+    <h1>AI Project Scoping Tool</h1>
+    <p>Describe your AI project idea and get an instant analysis: feasibility validation, ROI assessment, risk breakdown, a 4-phase scaling roadmap, and 5 measurable KPIs. Built for BAs pitching AI initiatives.</p>
+  </section>
+
+  <div class="how-it-works">
+    <div class="steps-row">
+      <div class="step">
+        <span class="step-num">Step 1</span>
+        Describe your AI project idea in plain language — what it does, who benefits
+      </div>
+      <div class="step">
+        <span class="step-num">Step 2</span>
+        Add your expected value and how you plan to scale it
+      </div>
+      <div class="step">
+        <span class="step-num">Step 3</span>
+        Get validation, ROI, risks, a roadmap and KPIs in seconds
+      </div>
+    </div>
+  </div>
+
+  <section class="tool-body">
+
+    <div class="input-card">
+      <label class="field-label" for="project-input">Describe your AI project</label>
+      <textarea id="project-input" rows="5" placeholder="Describe your AI project e.g. Automate invoice processing using AI to extract data from PDFs, match against POs, and route for approval automatically"></textarea>
+
+      <button class="example-btn" id="example-btn">Load example project</button>
+
+      <label class="field-label" for="value-input">Expected value / business outcome</label>
+      <span class="field-hint">What result are you targeting? Be as specific as possible.</span>
+      <textarea id="value-input" rows="3" placeholder="What outcome are you targeting e.g. Reduce processing time by 80%, cut manual errors to near zero, save 3 FTE hours per day"></textarea>
+
+      <label class="field-label" for="scaling-input">Scaling plan / constraints</label>
+      <span class="field-hint">How will you move from pilot to production? Any known constraints?</span>
+      <textarea id="scaling-input" rows="3" placeholder="How will you scale this e.g. Start with 10 invoices pilot then expand to full department of 200 invoices per day within 6 months"></textarea>
+
+      <br>
+      <button class="scope-btn" id="scope-btn">Scope My Project →</button>
+    </div>
+
+    <div class="error-box" id="error-box"></div>
+
+    <div class="loading-state" id="loading-state">
+      <div class="spinner"></div>
+      <p class="loading-label" id="loading-label">Analysing your project...</p>
+    </div>
+
+    <div class="result-area" id="result-area">
+      <div class="result-toolbar">
+        <span class="result-label">Analysis complete — 5 sections</span>
+        <button class="copy-all-btn" id="copy-all-btn">Copy Full Report</button>
+      </div>
+
+      <div class="result-section" id="section-validation">
+        <div class="section-header">
+          <div class="section-icon icon-validation">✅</div>
+          <span class="section-badge badge-validation">Project Validation</span>
+          <span class="section-title">Feasibility & AI Fit</span>
+        </div>
+        <div class="section-content" id="content-validation"></div>
+      </div>
+
+      <div class="result-section" id="section-value">
+        <div class="section-header">
+          <div class="section-icon icon-value">💰</div>
+          <span class="section-badge badge-value">Value Assessment</span>
+          <span class="section-title">ROI & Time Savings</span>
+        </div>
+        <div class="section-content" id="content-value"></div>
+      </div>
+
+      <div class="result-section" id="section-risks">
+        <div class="section-header">
+          <div class="section-icon icon-risks">⚠️</div>
+          <span class="section-badge badge-risks">Risks & Cons</span>
+          <span class="section-title">What Could Go Wrong</span>
+        </div>
+        <div class="section-content" id="content-risks"></div>
+      </div>
+
+      <div class="result-section" id="section-roadmap">
+        <div class="section-header">
+          <div class="section-icon icon-roadmap">🗺️</div>
+          <span class="section-badge badge-roadmap">Scaling Roadmap</span>
+          <span class="section-title">Pilot to Production</span>
+        </div>
+        <div class="section-content" id="content-roadmap"></div>
+      </div>
+
+      <div class="result-section" id="section-metrics">
+        <div class="section-header">
+          <div class="section-icon icon-metrics">📊</div>
+          <span class="section-badge badge-metrics">Success Metrics</span>
+          <span class="section-title">5 Measurable KPIs</span>
+        </div>
+        <div class="section-content" id="content-metrics"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h4>CareerForge AI</h4>
+        <p>Free tools and guides for analysts and operations professionals moving into AI-driven roles.</p>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="ai-business-analyst-transition.html">AI Analyst Transition</a></li>
+          <li><a href="ai-tools-for-analysts.html">AI Tools for Analysts</a></li>
+          <li><a href="ats-resume-guide.html">ATS Resume Guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="process-mapper.html">Process Mapper</a></li>
+          <li><a href="project-scoping.html">Project Scoping</a></li>
+          <li><a href="interview-generator.html">Interview Generator</a></li>
+          <li><a href="requirements-generator.html">Requirements Generator</a></li>
+          <li><a href="governance-checklist.html">Governance Checklist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CareerForge AI</span>
+      <span>Built with intent, not templates</span>
+    </div>
+  </footer>
+
+  <script>
+    const EXAMPLE_PROJECT = `Automate invoice processing using AI. Currently our AP team manually downloads invoices from email, checks amounts against printed PO logs, enters data into Excel, emails approvers, then re-enters data into our finance system. We want to use OCR and AI to extract invoice data automatically, match against digital PO records, and route for approval through an automated workflow.`;
+    const EXAMPLE_VALUE   = `Reduce invoice processing time from 5 days to under 24 hours. Eliminate manual data entry errors (currently ~8% error rate). Save approximately 3 FTE hours per day across the AP team. Target: process 200 invoices/day with no additional headcount.`;
+    const EXAMPLE_SCALING = `Phase 1: pilot with 10 invoices/day from one supplier. Phase 2: expand to top 20 suppliers (80 invoices/day). Phase 3: full department rollout. Main constraints: legacy ERP integration, change management with AP team, data privacy for supplier data.`;
+
+    document.getElementById('example-btn').addEventListener('click', () => {
+      document.getElementById('project-input').value  = EXAMPLE_PROJECT;
+      document.getElementById('value-input').value    = EXAMPLE_VALUE;
+      document.getElementById('scaling-input').value  = EXAMPLE_SCALING;
+    });
+
+    const loadingMessages = [
+      'Analysing your project...',
+      'Assessing feasibility...',
+      'Calculating ROI estimates...',
+      'Mapping scaling roadmap...',
+      'Defining success metrics...'
+    ];
+    let loadingInterval;
+
+    function startLoading() {
+      let i = 0;
+      document.getElementById('loading-label').textContent = loadingMessages[0];
+      loadingInterval = setInterval(() => {
+        i = (i + 1) % loadingMessages.length;
+        document.getElementById('loading-label').textContent = loadingMessages[i];
+      }, 2200);
+    }
+    function stopLoading() { clearInterval(loadingInterval); }
+
+    function extractSection(text, headers) {
+      for (var i = 0; i < headers.length; i++) {
+        var escaped = headers[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var re = new RegExp(escaped + '[:\\s]*\\n([\\s\\S]*?)(?=\\n[A-Z][A-Z &]+:|$)', 'i');
+        var m = text.match(re);
+        if (m && m[1] && m[1].trim().length > 10) return m[1].trim();
+      }
+      return '';
+    }
+
+    document.getElementById('scope-btn').addEventListener('click', async () => {
+      const projectDescription = document.getElementById('project-input').value.trim();
+      const expectedValue      = document.getElementById('value-input').value.trim();
+      const scalingSteps       = document.getElementById('scaling-input').value.trim();
+
+      if (!projectDescription) {
+        showError('Please describe your AI project first.');
+        return;
+      }
+
+      hideError();
+      document.getElementById('result-area').classList.remove('show');
+      document.getElementById('loading-state').classList.add('show');
+      document.getElementById('scope-btn').disabled = true;
+      startLoading();
+
+      try {
+        const response = await fetch('/.netlify/functions/scoping', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ projectDescription, expectedValue, scalingSteps })
+        });
+
+        const data = await response.json();
+
+        if (data.error) throw new Error(data.error);
+
+        const text = data.result || '';
+
+        const validation = extractSection(text, ['PROJECT VALIDATION', 'VALIDATION']);
+        const value      = extractSection(text, ['VALUE ASSESSMENT', 'VALUE']);
+        const risks      = extractSection(text, ['RISKS AND CONS', 'RISKS', 'RISKS & CONS']);
+        const roadmap    = extractSection(text, ['SCALING ROADMAP', 'ROADMAP']);
+        const metrics    = extractSection(text, ['SUCCESS METRICS', 'METRICS', 'KPIS']);
+
+        document.getElementById('content-validation').textContent = validation || fallbackSection(text, 0);
+        document.getElementById('content-value').textContent      = value      || fallbackSection(text, 1);
+        document.getElementById('content-risks').textContent      = risks      || fallbackSection(text, 2);
+        document.getElementById('content-roadmap').textContent    = roadmap    || fallbackSection(text, 3);
+        document.getElementById('content-metrics').textContent    = metrics    || fallbackSection(text, 4);
+
+        stopLoading();
+        document.getElementById('loading-state').classList.remove('show');
+        document.getElementById('scope-btn').disabled = false;
+        document.getElementById('result-area').classList.add('show');
+        document.getElementById('result-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      } catch (err) {
+        stopLoading();
+        document.getElementById('loading-state').classList.remove('show');
+        document.getElementById('scope-btn').disabled = false;
+        showError('Something went wrong: ' + err.message + '. Please try again.');
+      }
+    });
+
+    function fallbackSection(text, idx) {
+      var parts = text.split(/\n(?=[A-Z][A-Z &]+:)/);
+      return parts[idx] ? parts[idx].replace(/^[A-Z &]+:\s*/,'').trim() : '';
+    }
+
+    document.getElementById('copy-all-btn').addEventListener('click', () => {
+      var sections = [
+        { label: 'PROJECT VALIDATION', id: 'content-validation' },
+        { label: 'VALUE ASSESSMENT',   id: 'content-value' },
+        { label: 'RISKS AND CONS',     id: 'content-risks' },
+        { label: 'SCALING ROADMAP',    id: 'content-roadmap' },
+        { label: 'SUCCESS METRICS',    id: 'content-metrics' }
+      ];
+      var full = 'AI PROJECT SCOPING REPORT — CareerForge AI\n' + '='.repeat(44) + '\n\n';
+      sections.forEach(function(s) {
+        var content = document.getElementById(s.id).textContent;
+        full += s.label + ':\n' + content + '\n\n' + '─'.repeat(44) + '\n\n';
+      });
+      navigator.clipboard.writeText(full).then(function() {
+        var btn = document.getElementById('copy-all-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copy Full Report';
+          btn.classList.remove('copied');
+        }, 1800);
+      });
+    });
+
+    function showError(msg) {
+      var box = document.getElementById('error-box');
+      box.textContent = msg;
+      box.classList.add('show');
+    }
+    function hideError() {
+      document.getElementById('error-box').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
